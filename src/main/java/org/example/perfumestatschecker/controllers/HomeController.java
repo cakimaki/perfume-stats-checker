@@ -14,6 +14,6 @@ public class HomeController {
 	
 	@GetMapping("/printjson")
 	public String printJson(){
-		return "kur";
+		return "gonna print test json here";
 	}
 }
