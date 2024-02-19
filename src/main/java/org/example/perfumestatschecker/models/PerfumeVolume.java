@@ -13,8 +13,24 @@ public class PerfumeVolume {
 	private Long id;
 	
 	@Column(name = "volume")
-	private String volume;
+	private String name;
 	
 	@OneToMany(mappedBy = "volume")
 	private List<Perfume> perfumes;
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public List<Perfume> getPerfumes() {
+		return perfumes;
+	}
+	
+	public void setPerfumes(List<Perfume> perfumes) {
+		this.perfumes = perfumes;
+	}
 }

@@ -17,6 +17,10 @@ public class PerfumeJson {
 	public List<String> image;
 	public List<OfferJson> offers;
 	
+	public String category;
+	
+	public String id;
+	
 	public PerfumeJson() {
 	}
 	
@@ -24,6 +28,22 @@ public class PerfumeJson {
 		this.brand = brand;
 		this.image = image;
 		this.offers = offers;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	public void setBrand(BrandJson brand) {

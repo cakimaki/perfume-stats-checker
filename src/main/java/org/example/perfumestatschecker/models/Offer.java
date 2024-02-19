@@ -4,6 +4,7 @@ package org.example.perfumestatschecker.models;
 import jakarta.persistence.*;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,9 +18,8 @@ public class Offer {
 	@JoinColumn(name = "perfume_id")
 	private Perfume perfume;
 	
-	@OneToOne(mappedBy = "offer", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private Price price;
+	@OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Price> prices = new ArrayList<>();
 	
 	@Column(name = "site")
 	private String site;
@@ -33,80 +33,54 @@ public class Offer {
 	@Column(name = "url_to_image")
 	private String imageUrl;
 	
-	@OneToMany(mappedBy = "offer")
-	private List<TimeChecked> timeChecked;
 	
 	public Offer(){}
 	
-	public Offer(Perfume perfume, Price price, String site,
-	             boolean inStock, String offerUrl, String imageUrl,
-	             List<TimeChecked> timeChecked) {
-		this.perfume = perfume;
-		this.price = price;
-		this.site = site;
-		this.inStock = inStock;
-		this.offerUrl = offerUrl;
-		this.imageUrl = imageUrl;
-		this.timeChecked = timeChecked;
+	public Perfume getPerfume() {
+		return perfume;
 	}
 	
 	public void setPerfume(Perfume perfume) {
 		this.perfume = perfume;
 	}
 	
-	public void setPrice(Price price) {
-		this.price = price;
+	public List<Price> getPrices() {
+		return prices;
 	}
 	
-	public void setSite(String site) {
-		this.site = site;
-	}
-	
-	public void setInStock(boolean inStock) {
-		this.inStock = inStock;
-	}
-	
-	public void setOfferUrl(String offerUrl) {
-		this.offerUrl = offerUrl;
-	}
-	
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-	
-	public void setTimeChecked(List<TimeChecked> timeChecked) {
-		this.timeChecked = timeChecked;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public Perfume getPerfume() {
-		return perfume;
-	}
-	
-	public Price getPrice() {
-		return price;
+	public void setPrices(List<Price> prices) {
+		this.prices = prices;
 	}
 	
 	public String getSite() {
 		return site;
 	}
 	
+	public void setSite(String site) {
+		this.site = site;
+	}
+	
 	public boolean isInStock() {
 		return inStock;
+	}
+	
+	public void setInStock(boolean inStock) {
+		this.inStock = inStock;
 	}
 	
 	public String getOfferUrl() {
 		return offerUrl;
 	}
 	
+	public void setOfferUrl(String offerUrl) {
+		this.offerUrl = offerUrl;
+	}
+	
 	public String getImageUrl() {
 		return imageUrl;
 	}
 	
-	public List<TimeChecked> getTimeChecked() {
-		return timeChecked;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 }

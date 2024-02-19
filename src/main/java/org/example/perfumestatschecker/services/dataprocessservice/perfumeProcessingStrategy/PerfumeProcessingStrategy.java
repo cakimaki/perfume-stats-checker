@@ -2,6 +2,8 @@ package org.example.perfumestatschecker.services.dataprocessservice.perfumeProce
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 
+import java.util.List;
+
 public interface PerfumeProcessingStrategy {
-	public FilteredPerfumeDto processAndSavePerfumeData(String jsonResponse);
+	public List<FilteredPerfumeDto> processAndSavePerfumeData(String jsonResponse);
 }

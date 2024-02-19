@@ -3,6 +3,7 @@ package org.example.perfumestatschecker.services.entityservices.perfumetypeservi
 import org.example.perfumestatschecker.models.PerfumeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PerfumeTypeService extends JpaRepository<PerfumeType,Long> {
-
+public interface PerfumeTypeService{
+	
+	PerfumeType findOrCreatePerfumeType(String PerfumeType);
 }

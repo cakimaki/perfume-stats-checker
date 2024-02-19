@@ -12,8 +12,17 @@ public class PerfumeType {
 	private Long id;
 	
 	@Column(name = "type")
-	private String type;
+	private String name;
 	
 	@OneToMany(mappedBy = "type")
 	private List<Perfume> perfumes;
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String type) {
+		this.name = type;
+	}
+	
 }

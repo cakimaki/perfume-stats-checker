@@ -3,19 +3,28 @@ package org.example.perfumestatschecker.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "time_checked")
+@Table(name = "timechecked")
 public class TimeChecked {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "time")
+	@Column(name= "time_of_check")
 	private LocalDateTime time;
 	
 	@ManyToOne
-	@JoinColumn(name = "offer_id")
-	private Offer offer;
+	@JoinColumn(name= "price_id")
+	private Price price;
+	public TimeChecked() {
+	}
+	
+	public LocalDateTime getTime() {
+		return time;
+	}
+	
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
 }

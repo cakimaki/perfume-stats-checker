@@ -3,6 +3,8 @@ package org.example.perfumestatschecker.services.dataprocessservice.jsonprocessi
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 
+import java.util.List;
+
 public interface PerfumeDataPersistenceService {
-	public void persistFilteredPerfumeData(FilteredPerfumeDto dto);
+	public void persistFilteredPerfumeData(List<FilteredPerfumeDto> dtos);
 }
