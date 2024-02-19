@@ -1,36 +1,23 @@
 package org.example.perfumestatschecker.dtos.JsonExtractNotino;
 
-import org.example.perfumestatschecker.models.Brand;
-import org.example.perfumestatschecker.models.Offer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+@JsonIgnoreProperties(ignoreUnknown = true)
 
 public class OfferJson {
 	
 	public String name;
 	public String availability;
-	public double price;
+	public String price;
 	public String priceCurrency;
 	public String itemCountry;
 	public String sku;
 	public String url;
 	public String image;
 	
-	// Method to extract volume from name
-	public Integer getVolumeInMl() {
-		// Assuming the volume is always at the end of the name and followed by "мл."
-		Pattern pattern = Pattern.compile("(\\d+) мл\\.");
-		Matcher matcher = pattern.matcher(this.name);
-		if (matcher.find()) {
-			return Integer.parseInt(matcher.group(1));
-		}
-		return null;
-	}
 	public OfferJson() {
 	}
-	public OfferJson(String name, String availability, double price, String priceCurrency, String itemCountry, String sku, String url, String image) {
+	public OfferJson(String name, String availability, String price, String priceCurrency, String itemCountry, String sku, String url, String image) {
 		this.name = name;
 		this.availability = availability;
 		this.price = price;
@@ -49,7 +36,7 @@ public class OfferJson {
 		this.availability = availability;
 	}
 	
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	
@@ -81,7 +68,7 @@ public class OfferJson {
 		return availability;
 	}
 	
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 	

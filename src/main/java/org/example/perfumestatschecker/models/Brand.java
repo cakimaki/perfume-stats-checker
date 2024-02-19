@@ -13,7 +13,7 @@ public class Brand {
 	private Long id;
 	
 	@Column(name = "brand_name")
-	private String brandName;
+	private String name;
 	
 	@OneToMany(mappedBy = "brand")
 	private List<Perfume> perfumes;
@@ -22,7 +22,7 @@ public class Brand {
 	}
 	
 	public Brand(String brandName, List<Perfume> perfumes) {
-		this.brandName = brandName;
+		this.name = brandName;
 		this.perfumes = perfumes;
 	}
 	
@@ -34,16 +34,16 @@ public class Brand {
 		this.id = id;
 	}
 	
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
+	public void setName(String brandName) {
+		this.name = brandName;
 	}
 	
 	public void setPerfumes(List<Perfume> perfumes) {
 		this.perfumes = perfumes;
 	}
 	
-	public String getBrandName() {
-		return brandName;
+	public String getName() {
+		return name;
 	}
 	
 	public List<Perfume> getPerfumes() {

@@ -14,7 +14,7 @@ public class Perfume {
 	
 	//name of perfume
 	@Column(name = "perfume_name")
-	private String perfumeName;
+	private String name;
 	
 	//brand name of perfume
 	@ManyToOne
@@ -40,7 +40,7 @@ public class Perfume {
 	}
 	
 	public Perfume(String perfumeName, Brand brand, PerfumeVolume volume, PerfumeType type, List<Offer> offers) {
-		this.perfumeName = perfumeName;
+		this.name = perfumeName;
 		this.brand = brand;
 		this.volume = volume;
 		this.type = type;
@@ -51,8 +51,8 @@ public class Perfume {
 		this.id = id;
 	}
 	
-	public void setPerfumeName(String perfumeName) {
-		this.perfumeName = perfumeName;
+	public void setName(String perfumeName) {
+		this.name = perfumeName;
 	}
 	
 	public void setBrand(Brand brand) {
@@ -75,8 +75,8 @@ public class Perfume {
 		return id;
 	}
 	
-	public String getPerfumeName() {
-		return perfumeName;
+	public String getName() {
+		return name;
 	}
 	
 	public Brand getBrand() {

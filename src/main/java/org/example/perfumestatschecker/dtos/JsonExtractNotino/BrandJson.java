@@ -1,5 +1,9 @@
 package org.example.perfumestatschecker.dtos.JsonExtractNotino;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class BrandJson {
 	private String Name;
 	
