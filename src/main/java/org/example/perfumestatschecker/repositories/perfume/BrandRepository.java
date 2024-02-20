@@ -1,6 +1,6 @@
-package org.example.perfumestatschecker.repositories;
+package org.example.perfumestatschecker.repositories.perfume;
 
-import org.example.perfumestatschecker.models.Brand;
+import org.example.perfumestatschecker.models.perfume.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

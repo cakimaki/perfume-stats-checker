@@ -1,9 +1,13 @@
 package org.example.perfumestatschecker.services.dataprocessservice.jsonprocessing;
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.models.*;
-import org.example.perfumestatschecker.repositories.OfferRepository;
-import org.example.perfumestatschecker.repositories.PerfumeRepository;
+import org.example.perfumestatschecker.models.offer.Offer;
+import org.example.perfumestatschecker.models.perfume.Brand;
+import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.models.perfume.PerfumeType;
+import org.example.perfumestatschecker.models.perfume.PerfumeVolume;
+import org.example.perfumestatschecker.repositories.offer.OfferRepository;
+import org.example.perfumestatschecker.repositories.perfume.PerfumeRepository;
 import org.example.perfumestatschecker.services.entityservices.brandservice.BrandService;
 import org.example.perfumestatschecker.services.entityservices.officeservice.OfferService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservice.PerfumeService;
@@ -55,10 +59,12 @@ public class PerfumeDataPersistenceServiceImpl implements PerfumeDataPersistence
 			//perfume entity
 			Perfume perfume = perfumeService.findOrCreatePerfume(dto.getName(),brand, perfumeType, volume);
 			
-			//offer entity - perfumeId, price, site, url, timecheck - if perfumeid&&site exist just create timecheck
+			//offer entity - perfumeId, site, url- if perfumeid&&site exist just create timecheck
 			Offer offer = offerService.createOrUpdateOffer(dto,perfume);
-			offer.setInStock(dto.getStock());
 			offersToPersist.add(offer);
+			
+			//offerstatus entity -
+			//calls offerstatus service where it searches the offer id
 		}
 		
 		//saves all the offers from the loop.

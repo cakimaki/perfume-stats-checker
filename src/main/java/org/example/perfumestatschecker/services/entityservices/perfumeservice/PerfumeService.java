@@ -1,9 +1,9 @@
 package org.example.perfumestatschecker.services.entityservices.perfumeservice;
 
-import org.example.perfumestatschecker.models.Brand;
-import org.example.perfumestatschecker.models.Perfume;
-import org.example.perfumestatschecker.models.PerfumeType;
-import org.example.perfumestatschecker.models.PerfumeVolume;
+import org.example.perfumestatschecker.models.perfume.Brand;
+import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.models.perfume.PerfumeType;
+import org.example.perfumestatschecker.models.perfume.PerfumeVolume;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface PerfumeService {

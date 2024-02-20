@@ -11,6 +11,8 @@ public class FilteredPerfumeDto {
 	private String site;
 	private boolean stock;
 	
+	private String urlToImage;
+	
 	public FilteredPerfumeDto(){};
 	
 	public FilteredPerfumeDto(String name, String brand, String type, String volume, String price, String discount, String url, boolean stock) {
@@ -22,6 +24,14 @@ public class FilteredPerfumeDto {
 		this.discount = discount;
 		this.url = url;
 		this.stock = stock;
+	}
+	
+	public String getUrlToImage() {
+		return urlToImage;
+	}
+	
+	public void setUrlToImage(String urlToImage) {
+		this.urlToImage = urlToImage;
 	}
 	
 	public boolean isStock() {
@@ -110,7 +120,8 @@ public class FilteredPerfumeDto {
 				", price='" + price + '\'' +
 				", discount='" + discount + '\'' +
 				", url='" + url + '\'' +
-				", stock='" + stock + '\'' +
+				", site='" + site + '\'' +
+				", stock=" + stock +
 				'}';
 	}
 }

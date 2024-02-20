@@ -1,16 +1,8 @@
 package org.example.perfumestatschecker.services.entityservices.priceservice;
 
-import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.models.Offer;
-import org.example.perfumestatschecker.models.Price;
-import org.example.perfumestatschecker.repositories.PriceRepository;
+import org.example.perfumestatschecker.repositories.offer.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Comparator;
-
-import static java.lang.Double.parseDouble;
 
 @Service
 public class PriceServiceImpl implements PriceService{
@@ -23,7 +15,7 @@ public class PriceServiceImpl implements PriceService{
 	}
 	
 	
-	@Override
+	/*@Override
 	@Transactional
 	public Price createOrUpdatePrice(Offer offer, FilteredPerfumeDto dto){
 		Price currentPrice = offer.getPrices().stream()
@@ -60,5 +52,5 @@ public class PriceServiceImpl implements PriceService{
 		
 		// if current price matches the dto's price - return the current price without changes
 		return currentPrice;
-	}
+	}*/
 }

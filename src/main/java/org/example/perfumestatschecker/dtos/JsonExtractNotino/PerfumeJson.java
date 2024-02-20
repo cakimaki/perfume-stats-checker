@@ -1,15 +1,9 @@
 package org.example.perfumestatschecker.dtos.JsonExtractNotino;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.example.perfumestatschecker.models.Brand;
-import org.example.perfumestatschecker.models.Offer;
-import org.springframework.core.style.ToStringCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PerfumeJson {
@@ -19,6 +13,7 @@ public class PerfumeJson {
 	
 	public String category;
 	
+	@JsonProperty("@id")
 	public String id;
 	
 	public PerfumeJson() {

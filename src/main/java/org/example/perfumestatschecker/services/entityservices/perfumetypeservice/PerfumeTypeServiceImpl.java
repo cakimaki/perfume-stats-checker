@@ -1,7 +1,7 @@
 package org.example.perfumestatschecker.services.entityservices.perfumetypeservice;
 
-import org.example.perfumestatschecker.models.PerfumeType;
-import org.example.perfumestatschecker.repositories.PerfumeTypeRepository;
+import org.example.perfumestatschecker.models.perfume.PerfumeType;
+import org.example.perfumestatschecker.repositories.perfume.PerfumeTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

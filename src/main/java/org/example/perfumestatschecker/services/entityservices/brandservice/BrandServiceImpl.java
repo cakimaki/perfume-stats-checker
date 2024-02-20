@@ -1,7 +1,7 @@
 package org.example.perfumestatschecker.services.entityservices.brandservice;
 
-import org.example.perfumestatschecker.models.Brand;
-import org.example.perfumestatschecker.repositories.BrandRepository;
+import org.example.perfumestatschecker.models.perfume.Brand;
+import org.example.perfumestatschecker.repositories.perfume.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.example.perfumestatschecker.models;
+package org.example.perfumestatschecker.models.offer;
 
 import jakarta.persistence.*;
 
@@ -15,8 +15,9 @@ public class TimeChecked {
 	private LocalDateTime time;
 	
 	@ManyToOne
-	@JoinColumn(name= "price_id")
-	private Price price;
+	@JoinColumn(name= "timechecked_id")
+	private OfferStatus offerStatus;
+	
 	public TimeChecked() {
 	}
 	

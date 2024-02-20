@@ -1,9 +1,9 @@
-package org.example.perfumestatschecker.repositories;
+package org.example.perfumestatschecker.repositories.perfume;
 
-import org.example.perfumestatschecker.models.Brand;
-import org.example.perfumestatschecker.models.Perfume;
-import org.example.perfumestatschecker.models.PerfumeType;
-import org.example.perfumestatschecker.models.PerfumeVolume;
+import org.example.perfumestatschecker.models.perfume.Brand;
+import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.models.perfume.PerfumeType;
+import org.example.perfumestatschecker.models.perfume.PerfumeVolume;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

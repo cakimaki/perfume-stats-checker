@@ -1,7 +1,6 @@
 package org.example.perfumestatschecker.services.entityservices.perfumetypeservice;
 
-import org.example.perfumestatschecker.models.PerfumeType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.example.perfumestatschecker.models.perfume.PerfumeType;
 
 public interface PerfumeTypeService{
 	

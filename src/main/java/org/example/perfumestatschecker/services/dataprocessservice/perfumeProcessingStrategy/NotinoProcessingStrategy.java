@@ -7,6 +7,7 @@ import org.example.perfumestatschecker.dtos.JsonExtractNotino.OfferJson;
 import org.example.perfumestatschecker.dtos.JsonExtractNotino.PerfumeJson;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,13 +35,15 @@ public class NotinoProcessingStrategy implements PerfumeProcessingStrategy {
 				filteredPerfumeDto.setBrand(perfumeDetails.getBrand().getName());
 				filteredPerfumeDto.setName(extractName(offer.getName()));
 				filteredPerfumeDto.setPrice(offer.getPrice());
-				filteredPerfumeDto.setSite(perfumeDetails.id);
+				filteredPerfumeDto.setSite(extractSiteName(perfumeDetails.getId()));
 				filteredPerfumeDto.setUrl(offer.getUrl());
 				filteredPerfumeDto.setStock(checkAvailability(offer.getAvailability()));
 				filteredPerfumeDto.setDiscount(""); //empty...
 				filteredPerfumeDto.setVolume(extractVolume(offer.getName()));
 				filteredPerfumeDto.setType(checkPerfumeType(perfumeDetails.getCategory()));
+				filteredPerfumeDto.setUrlToImage(offer.getImage());
 				filteredPerfumeDtos.add(filteredPerfumeDto);
+				
 			}
 			
 			//perfumeService.save(filteredPerfumeDto);
@@ -51,6 +54,21 @@ public class NotinoProcessingStrategy implements PerfumeProcessingStrategy {
 		return filteredPerfumeDtos;
 	}
 	
+	//todo
+	// this method should be made abstract for all sites.
+	private String extractSiteName(String url) {
+		try {
+			URL parsedUrl = new URL(url);
+			String host = parsedUrl.getHost(); // example: www.notino.bg, etc...
+			String[] parts = host.split("\\."); // split by '.'
+			if (parts.length > 1) {
+				return parts[1]; // assuming the site name is the second part
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ""; // return empty if anything else happens
+	}
 	private String checkPerfumeType(String category){
 		if(category.contains("парфюмна вода")){
 			return "Eau de Perfume";
@@ -76,12 +94,12 @@ public class NotinoProcessingStrategy implements PerfumeProcessingStrategy {
 	private String extractName(String name) {
 		
 		// Example: "TOM FORD Eau de Soleil Blanc 100 мл." -> "TOM FORD Eau de Soleil Blanc"
-		Pattern pattern = Pattern.compile("^(.*?)\\s*\\d+\\s*мл\\.$"); // Capture everything before the volume
+		Pattern pattern = Pattern.compile("^(.*?)\\s*\\d+\\s*мл\\.$"); // Captures everything before the volume
 		Matcher matcher = pattern.matcher(name);
 		if (matcher.find()) {
 			return matcher.group(1).trim(); // Return the captured name, trimming any leading/trailing spaces
 		}
-		return ""; // Return empty string if name not found
+		return "";
 	}
 	
 	// logic to extract numeric part of volume from the name
@@ -90,8 +108,8 @@ public class NotinoProcessingStrategy implements PerfumeProcessingStrategy {
 		Pattern pattern = Pattern.compile("(\\d+)\\s*мл"); // Captures one or more digits followed by optional spaces and "мл"
 		Matcher matcher = pattern.matcher(name);
 		if (matcher.find()) {
-			return matcher.group(1); // Return only the first capturing group (the digits)
+			return matcher.group(1); // Returns only the first capturing group (the digits)
 		}
-		return ""; // Return empty string if volume not found
+		return "";
 	}
 }

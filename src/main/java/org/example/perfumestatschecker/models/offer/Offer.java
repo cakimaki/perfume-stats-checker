@@ -1,9 +1,9 @@
-package org.example.perfumestatschecker.models;
+package org.example.perfumestatschecker.models.offer;
 
 
 import jakarta.persistence.*;
+import org.example.perfumestatschecker.models.perfume.Perfume;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +19,10 @@ public class Offer {
 	private Perfume perfume;
 	
 	@OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Price> prices = new ArrayList<>();
+	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
 	@Column(name = "site")
 	private String site;
-	
-	@Column(name = "in_stock")
-	private boolean inStock;
 	
 	@Column(name = "url_to_offer")
 	private String offerUrl;
@@ -44,12 +41,12 @@ public class Offer {
 		this.perfume = perfume;
 	}
 	
-	public List<Price> getPrices() {
-		return prices;
+	public List<OfferStatus> getOfferStatuses() {
+		return offerStatuses;
 	}
 	
-	public void setPrices(List<Price> prices) {
-		this.prices = prices;
+	public void setOfferStatuses(List<OfferStatus> offerStatuses) {
+		this.offerStatuses = offerStatuses;
 	}
 	
 	public String getSite() {
@@ -58,14 +55,6 @@ public class Offer {
 	
 	public void setSite(String site) {
 		this.site = site;
-	}
-	
-	public boolean isInStock() {
-		return inStock;
-	}
-	
-	public void setInStock(boolean inStock) {
-		this.inStock = inStock;
 	}
 	
 	public String getOfferUrl() {

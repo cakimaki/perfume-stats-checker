@@ -1,9 +1,9 @@
 package org.example.perfumestatschecker.services.entityservices.officeservice;
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.models.Offer;
-import org.example.perfumestatschecker.models.Perfume;
-import org.example.perfumestatschecker.repositories.OfferRepository;
+import org.example.perfumestatschecker.models.offer.Offer;
+import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +40,7 @@ public class OfferServiceImpl implements OfferService {
 	}
 	private void updateOfferFromDto(Offer offer, FilteredPerfumeDto dto) {
 		offer.setOfferUrl(dto.getUrl());
-		offer.setInStock((dto.getStock()));
 		offer.setSite(dto.getSite());
+		offer.setImageUrl(dto.getUrlToImage());
 	}
 }

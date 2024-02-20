@@ -1,7 +1,8 @@
-package org.example.perfumestatschecker.models;
+package org.example.perfumestatschecker.models.perfume;
 
 
 import jakarta.persistence.*;
+import org.example.perfumestatschecker.models.perfume.Perfume;
 
 import java.util.List;
 

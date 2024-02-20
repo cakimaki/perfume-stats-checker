@@ -1,8 +1,7 @@
-package org.example.perfumestatschecker.models;
+package org.example.perfumestatschecker.models.offer;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +11,6 @@ public class Price {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "offer_id")
-	private Offer offer;
 	
 	@Column(name = "price")
 	private Double price;
@@ -33,7 +28,7 @@ public class Price {
 	private Integer pricePerMl;
 	
 	@OneToMany(mappedBy = "price")
-	private List<TimeChecked> timeChecked = new ArrayList<>();
+	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
 	public void setId(Long id) {
 		this.id = id;
@@ -43,21 +38,14 @@ public class Price {
 		return id;
 	}
 	
-	public List<TimeChecked> getTimeChecked() {
-		return timeChecked;
+	public List<OfferStatus> getOfferStatuses() {
+		return offerStatuses;
 	}
 	
-	public void setTimeChecked(List<TimeChecked> timeChecked) {
-		this.timeChecked = timeChecked;
+	public void setOfferStatuses(List<OfferStatus> offerStatuses) {
+		this.offerStatuses = offerStatuses;
 	}
 	
-	public Offer getOffer() {
-		return offer;
-	}
-	
-	public void setOffer(Offer offer) {
-		this.offer = offer;
-	}
 	
 	public Double getPrice() {
 		return price;
