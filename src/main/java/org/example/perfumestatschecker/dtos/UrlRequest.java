@@ -1,7 +1,7 @@
 package org.example.perfumestatschecker.dtos;
 
 public class UrlRequest {
-	String url;
+	private String url;
 	
 	public String getUrl() {
 		return url;

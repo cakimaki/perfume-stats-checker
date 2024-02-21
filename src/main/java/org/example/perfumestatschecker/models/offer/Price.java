@@ -30,6 +30,17 @@ public class Price {
 	@OneToMany(mappedBy = "price")
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
+	
+	public Price(){
+	
+	}
+	
+	public Price(Double price){
+	
+	}
+	public Price(Double price, Integer discountPercent){
+	
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}

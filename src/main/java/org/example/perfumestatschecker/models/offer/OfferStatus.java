@@ -38,6 +38,14 @@ public class OfferStatus {
 		this.id = id;
 	}
 	
+	public List<TimeOfCheck> getTimeOfChecks() {
+		return timeOfChecks;
+	}
+	
+	public void setTimeOfChecks(List<TimeOfCheck> timeOfChecks) {
+		this.timeOfChecks = timeOfChecks;
+	}
+	
 	public boolean isLastStatus() {
 		return lastStatus;
 	}
