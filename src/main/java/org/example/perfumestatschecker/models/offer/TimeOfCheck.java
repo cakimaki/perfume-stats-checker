@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "timechecked")
-public class TimeChecked {
+public class TimeOfCheck {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -15,10 +15,10 @@ public class TimeChecked {
 	private LocalDateTime time;
 	
 	@ManyToOne
-	@JoinColumn(name= "timechecked_id")
+	@JoinColumn(name= "offer_status_id")
 	private OfferStatus offerStatus;
 	
-	public TimeChecked() {
+	public TimeOfCheck() {
 	}
 	
 	public LocalDateTime getTime() {
@@ -27,5 +27,21 @@ public class TimeChecked {
 	
 	public void setTime(LocalDateTime time) {
 		this.time = time;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public OfferStatus getOfferStatus() {
+		return offerStatus;
+	}
+	
+	public void setOfferStatus(OfferStatus offerStatus) {
+		this.offerStatus = offerStatus;
 	}
 }

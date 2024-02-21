@@ -1,8 +1,12 @@
 package org.example.perfumestatschecker.services.entityservices.priceservice;
 
+import org.example.perfumestatschecker.models.offer.Price;
 import org.example.perfumestatschecker.repositories.offer.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class PriceServiceImpl implements PriceService{
@@ -14,7 +18,19 @@ public class PriceServiceImpl implements PriceService{
 		this.priceRepository = priceRepository;
 	}
 	
-	
+	@Transactional
+	@Override
+	public Price createOrUpdate(Double priceNumber){
+		Optional<Price> priceOpt = priceRepository.findByPrice(priceNumber);
+		
+		if(priceOpt.isPresent()){
+			return priceOpt.get();
+		}else{
+			Price price = new Price();
+			price.setPrice(priceNumber);
+			return priceRepository.save(price);
+		}
+	}
 	/*@Override
 	@Transactional
 	public Price createOrUpdatePrice(Offer offer, FilteredPerfumeDto dto){

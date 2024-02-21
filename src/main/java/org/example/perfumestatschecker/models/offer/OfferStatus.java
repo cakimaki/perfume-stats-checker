@@ -12,8 +12,11 @@ public class OfferStatus {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "last_status")
+	private boolean lastStatus;
+	
 	@OneToMany(mappedBy = "offerStatus")
-	private List<TimeChecked> timeCheckeds = new ArrayList<>();
+	private List<TimeOfCheck> timeOfChecks = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "offer_id")
@@ -27,5 +30,51 @@ public class OfferStatus {
 	@JoinColumn(name= "stock_id")
 	private StockStatus stockStatus;
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public boolean isLastStatus() {
+		return lastStatus;
+	}
+	
+	public void setLastStatus(boolean lastStatus) {
+		this.lastStatus = lastStatus;
+	}
+	
+	public List<TimeOfCheck> getTimeCheckeds() {
+		return timeOfChecks;
+	}
+	
+	public void setTimeCheckeds(List<TimeOfCheck> timeOfChecks) {
+		this.timeOfChecks = timeOfChecks;
+	}
+	
+	public Offer getOffer() {
+		return offer;
+	}
+	
+	public void setOffer(Offer offer) {
+		this.offer = offer;
+	}
+	
+	public Price getPrice() {
+		return price;
+	}
+	
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+	
+	public StockStatus getStockStatus() {
+		return stockStatus;
+	}
+	
+	public void setStockStatus(StockStatus stockStatus) {
+		this.stockStatus = stockStatus;
+	}
 }

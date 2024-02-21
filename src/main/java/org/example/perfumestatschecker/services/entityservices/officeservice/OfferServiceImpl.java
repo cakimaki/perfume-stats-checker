@@ -26,21 +26,15 @@ public class OfferServiceImpl implements OfferService {
 		
 		Offer offer;
 		if (existingOfferOpt.isPresent()) {
-			// Existing offer found, update its information
-			offer = existingOfferOpt.get();
-			updateOfferFromDto(offer, dto);
+			return existingOfferOpt.get();
 		} else {
-			// No existing offer found, create a new one
 			offer = new Offer();
 			offer.setPerfume(perfume);
-			updateOfferFromDto(offer, dto);
+			offer.setOfferUrl(dto.getUrl());
+			offer.setSite(dto.getSite());
+			offer.setImageUrl(dto.getUrlToImage());
 		}
 		
-		return offer;
-	}
-	private void updateOfferFromDto(Offer offer, FilteredPerfumeDto dto) {
-		offer.setOfferUrl(dto.getUrl());
-		offer.setSite(dto.getSite());
-		offer.setImageUrl(dto.getUrlToImage());
+		return offerRepository.save(offer);
 	}
 }

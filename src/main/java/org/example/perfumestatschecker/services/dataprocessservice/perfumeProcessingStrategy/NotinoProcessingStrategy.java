@@ -82,11 +82,11 @@ public class NotinoProcessingStrategy implements PerfumeProcessingStrategy {
 	}
 	
 	//logic to see if product available
-	private boolean checkAvailability(String stock){
+	private String checkAvailability(String stock){
 		if(stock.equals("https://schema.org/InStock")){
-			return true;
+			return "Available";
 		}else{
-			return false;
+			return "Non-available";
 		}
 	}
 	
