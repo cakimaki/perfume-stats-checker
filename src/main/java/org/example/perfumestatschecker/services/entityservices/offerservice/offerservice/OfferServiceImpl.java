@@ -1,19 +1,21 @@
-package org.example.perfumestatschecker.services.entityservices.offerservice.officeservice;
+package org.example.perfumestatschecker.services.entityservices.offerservice.offerservice;
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
+import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.models.offer.Offer;
 import org.example.perfumestatschecker.models.perfume.Perfume;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferServiceImpl implements OfferService {
 	
 	private final OfferRepository offerRepository;
-	
 	public OfferServiceImpl(OfferRepository offerRepository) {
 		this.offerRepository = offerRepository;
 	}
@@ -36,5 +38,10 @@ public class OfferServiceImpl implements OfferService {
 		}
 		
 		return offerRepository.save(offer);
+	}
+	
+	@Override
+	public List<OfferProjectionDto> getOfferDetails(){
+		return offerRepository.findOfferDetailsWithLastStatus();
 	}
 }

@@ -1,6 +1,8 @@
 package org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice;
 
 
+import org.example.perfumestatschecker.dtos.getdtos.PerfumeDetailsDto;
+import org.example.perfumestatschecker.dtos.PerfumeMapper;
 import org.example.perfumestatschecker.models.perfume.Brand;
 import org.example.perfumestatschecker.models.perfume.Perfume;
 import org.example.perfumestatschecker.models.perfume.PerfumeType;
@@ -10,13 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PerfumeServiceImpl implements PerfumeService {
-	@Autowired
-	private PerfumeRepository perfumeRepository;
 	
+	private final PerfumeRepository perfumeRepository;
+	private final PerfumeMapper perfumeMapper;
+	
+	@Autowired
+	public PerfumeServiceImpl(PerfumeRepository perfumeRepository, PerfumeMapper perfumeMapper){
+		this.perfumeRepository=perfumeRepository;
+		this.perfumeMapper = perfumeMapper;
+	}
 	public boolean perfumeExists(String name, Brand brand, PerfumeType type, PerfumeVolume volume) {
 		Optional<Perfume> existingPerfume = perfumeRepository.findByNameAndVolumeAndType(name, brand, type, volume);
 		return existingPerfume.isPresent();
@@ -40,4 +50,14 @@ public class PerfumeServiceImpl implements PerfumeService {
 			return perfumeRepository.save(newPerfume);
 		}
 	}
+	
+	
+	@Override
+	public List<PerfumeDetailsDto> getAllPerfumesDetails(){
+		return perfumeRepository.findAll().stream().map(perfumeMapper::convertToDto).collect(Collectors.toList());
+	}
+	
+	/*public PerfumeDetailsDto getPerfumeById(Long id){
+	
+	}*/
 }

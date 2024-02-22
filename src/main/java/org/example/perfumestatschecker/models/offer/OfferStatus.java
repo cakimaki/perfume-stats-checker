@@ -2,6 +2,7 @@ package org.example.perfumestatschecker.models.offer;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,12 @@ public class OfferStatus {
 	
 	@Column(name = "last_status")
 	private boolean lastStatus;
+	
+	@Column(name = "first_time_of_check")
+	private LocalDateTime firstTimeOfCheck;
+	
+	@Column(name = "last_time_of_check")
+	private LocalDateTime lastTimeOfCheck;
 	
 	@OneToMany(mappedBy = "offerStatus")
 	private List<TimeOfCheck> timeOfChecks = new ArrayList<>();
@@ -29,6 +36,22 @@ public class OfferStatus {
 	@ManyToOne
 	@JoinColumn(name= "stock_id")
 	private StockStatus stockStatus;
+	
+	public LocalDateTime getFirstTimeOfCheck() {
+		return firstTimeOfCheck;
+	}
+	
+	public void setFirstTimeOfCheck(LocalDateTime firstTimeOfCheck) {
+		this.firstTimeOfCheck = firstTimeOfCheck;
+	}
+	
+	public LocalDateTime getLastTimeOfCheck() {
+		return lastTimeOfCheck;
+	}
+	
+	public void setLastTimeOfCheck(LocalDateTime lastTimeOfCheck) {
+		this.lastTimeOfCheck = lastTimeOfCheck;
+	}
 	
 	public Long getId() {
 		return id;

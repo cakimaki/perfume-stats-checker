@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,12 +37,15 @@ public class OfferStatusServiceImpl implements OfferStatusService {
 		if (offerStatusOpt.isPresent()) {
 			//if found assign to returning value
 			returnOfferStatus = offerStatusOpt.get();
+			returnOfferStatus.setLastTimeOfCheck(LocalDateTime.now());
 		} else {
 			// if not, first update lastStatuses for the offer
 			updateLastStatuses(offer);
 			
 			// Then create a new OfferStatus
 			OfferStatus newStatus = new OfferStatus();
+			
+			newStatus.setFirstTimeOfCheck(LocalDateTime.now());
 			newStatus.setOffer(offer);
 			newStatus.setPrice(price);
 			newStatus.setStockStatus(stockStatus);

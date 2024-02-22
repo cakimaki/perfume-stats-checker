@@ -12,7 +12,7 @@ import org.example.perfumestatschecker.models.perfume.PerfumeVolume;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.brandservice.BrandService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerstatusservice.OfferStatusService;
-import org.example.perfumestatschecker.services.entityservices.offerservice.officeservice.OfferService;
+import org.example.perfumestatschecker.services.entityservices.offerservice.offerservice.OfferService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice.PerfumeService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumetypeservice.PerfumeTypeService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumevolumeservice.PerfumeVolumeService;

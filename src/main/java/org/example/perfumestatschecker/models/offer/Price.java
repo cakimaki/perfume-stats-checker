@@ -27,6 +27,12 @@ public class Price {
 	@Column(name = "price_per_ml")
 	private Integer pricePerMl;
 	
+	@Column(name = "last_price")
+	private Double lastPrice;
+	
+	@Column(name = "percent_difference_from_last_price")
+	private Integer percentDifferenceFromLastPrice;
+	
 	@OneToMany(mappedBy = "price")
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	

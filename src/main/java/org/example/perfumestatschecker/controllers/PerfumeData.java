@@ -4,10 +4,7 @@ import org.example.perfumestatschecker.dtos.UrlRequest;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProcessingPipelineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/perfume")
@@ -33,6 +30,8 @@ public class PerfumeData {
 			return ResponseEntity.internalServerError().body("Failed to persist data for URL: " + urlRequest.getUrl());
 		}
 	}
+	
+
 
 
 }

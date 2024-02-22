@@ -3,8 +3,8 @@ package org.example.perfumestatschecker.services.dataintegration.sitedataparsing
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.dtos.JsonExtractNotino.OfferJson;
-import org.example.perfumestatschecker.dtos.JsonExtractNotino.PerfumeJson;
+import org.example.perfumestatschecker.dtos.siteextractions.JsonExtractNotino.OfferJson;
+import org.example.perfumestatschecker.dtos.siteextractions.JsonExtractNotino.PerfumeJson;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;

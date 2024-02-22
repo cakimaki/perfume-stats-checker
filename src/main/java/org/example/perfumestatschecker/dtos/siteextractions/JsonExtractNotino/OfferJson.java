@@ -1,4 +1,4 @@
-package org.example.perfumestatschecker.dtos.JsonExtractNotino;
+package org.example.perfumestatschecker.dtos.siteextractions.JsonExtractNotino;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
