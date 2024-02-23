@@ -81,8 +81,8 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 			//offer entity - perfumeId, site, url- if perfumeid&&site exist just create timecheck
 			Offer offer = offerService.createOrUpdateOffer(dto, perfume);
 			
-			
-			Price price = priceService.createOrUpdate(convertToDouble(dto.getPrice()));
+			//new price, send the offer if you need to get previous price
+			Price price = priceService.createOrUpdate(convertToDouble(dto.getPrice()), offer);
 			StockStatus stockStatus = stockStatusService.findOrCreate(dto.getStock());
 			
 			//offerstatus entity -

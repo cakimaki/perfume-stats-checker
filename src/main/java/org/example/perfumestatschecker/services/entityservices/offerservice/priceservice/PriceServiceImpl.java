@@ -1,6 +1,9 @@
 package org.example.perfumestatschecker.services.entityservices.offerservice.priceservice;
 
+import org.example.perfumestatschecker.models.offer.Offer;
+import org.example.perfumestatschecker.models.offer.OfferStatus;
 import org.example.perfumestatschecker.models.offer.Price;
+import org.example.perfumestatschecker.repositories.offer.OfferStatusRepository;
 import org.example.perfumestatschecker.repositories.offer.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +15,16 @@ import java.util.Optional;
 public class PriceServiceImpl implements PriceService{
 	
 	private final PriceRepository priceRepository;
-	
+	private final OfferStatusRepository offerStatusRepository;
 	@Autowired
-	public PriceServiceImpl(PriceRepository priceRepository){
+	public PriceServiceImpl(PriceRepository priceRepository, OfferStatusRepository offerStatusRepository){
 		this.priceRepository = priceRepository;
+		this.offerStatusRepository = offerStatusRepository;
 	}
 	
 	@Transactional
 	@Override
-	public Price createOrUpdate(Double priceNumber){
+	public Price createOrUpdate(Double priceNumber, Offer offer){
 		Optional<Price> priceOpt = priceRepository.findByPrice(priceNumber);
 		
 		if(priceOpt.isPresent()){
@@ -28,8 +32,18 @@ public class PriceServiceImpl implements PriceService{
 		}else{
 			Price price = new Price();
 			price.setPrice(priceNumber);
+			//find the existing
+			OfferStatus offerStatus = offerStatusRepository.findOfferStatusByOfferAndLastStatusTrue(offer);
+			if(offerStatus != null) {
+				price.setLastPrice(offerStatus.getPrice().getPrice());
+				price.setPercentDifferenceFromLastPrice(calculatePercentDifferenceFromLastPrice(price.getPrice(),price.getLastPrice()));
+			}
 			return priceRepository.save(price);
 		}
+	}
+	
+	public Integer calculatePercentDifferenceFromLastPrice(Double newprice, Double lastprice){
+		return (Integer) (int) (((newprice*100)/ lastprice) -100);
 	}
 	/*@Override
 	@Transactional

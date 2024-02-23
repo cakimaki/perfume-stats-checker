@@ -6,7 +6,8 @@ import org.example.perfumestatschecker.models.offer.Price;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface PriceService {
+	
 	@Transactional
-	Price createOrUpdate(Double enteredPrice);
+	Price createOrUpdate(Double priceNumber, Offer offer);
 	//Price createOrUpdatePrice(Offer offer, FilteredPerfumeDto dto);
 }

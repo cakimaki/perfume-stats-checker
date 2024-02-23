@@ -21,7 +21,7 @@ public interface OfferProjectionDto {
 	
 	Double  getLastPrice();
 	
-	Integer getLastPricePercent();
+	Integer getPercentDifferenceFromLastPrice();
 	
 	String getStockStatus();
 	

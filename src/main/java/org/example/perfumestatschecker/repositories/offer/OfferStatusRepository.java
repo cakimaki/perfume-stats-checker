@@ -16,4 +16,7 @@ public interface OfferStatusRepository extends JpaRepository<OfferStatus, Long> 
 	Optional<OfferStatus> findByOfferAndPriceAndStock(@Param("offer") Offer offer, @Param("price") Price price, @Param("stock") StockStatus stock);
 	
 	List<OfferStatus> findAllByOfferAndLastStatusTrue(Offer offer);
+	
+	@Query("SELECT os FROM OfferStatus os WHERE os.offer = :offer AND os.lastStatus = true")
+	OfferStatus findOfferStatusByOfferAndLastStatusTrue(Offer offer);
 }

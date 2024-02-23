@@ -47,6 +47,23 @@ public class Price {
 	public Price(Double price, Integer discountPercent){
 	
 	}
+	
+	public Double getLastPrice() {
+		return lastPrice;
+	}
+	
+	public void setLastPrice(Double lastPrice) {
+		this.lastPrice = lastPrice;
+	}
+	
+	public Integer getPercentDifferenceFromLastPrice() {
+		return percentDifferenceFromLastPrice;
+	}
+	
+	public void setPercentDifferenceFromLastPrice(Integer percentDifferenceFromLastPrice) {
+		this.percentDifferenceFromLastPrice = percentDifferenceFromLastPrice;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
