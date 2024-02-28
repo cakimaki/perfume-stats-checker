@@ -14,8 +14,9 @@ public class Perfume {
 	private Long id;
 	
 	//name of perfume
-	@Column(name = "perfume_name")
-	private String name;
+	@ManyToOne
+	@JoinColumn(name = "perfumename_id")
+	private PerfumeName name;
 	
 	//brand name of perfume
 	@ManyToOne
@@ -24,14 +25,13 @@ public class Perfume {
 	
 	//volume of perfume
 	@ManyToOne
-	@JoinColumn(name="volume_id")
+	@JoinColumn(name = "volume_id")
 	private PerfumeVolume volume;
 	
 	//type of perfume
 	@ManyToOne
-	@JoinColumn(name="type_id")
+	@JoinColumn(name = "type_id")
 	private PerfumeType type;
-	
 	
 	//offers of perfume
 	@OneToMany(mappedBy = "perfume")
@@ -40,8 +40,8 @@ public class Perfume {
 	public Perfume() {
 	}
 	
-	public Perfume(String perfumeName, Brand brand, PerfumeVolume volume, PerfumeType type, List<Offer> offers) {
-		this.name = perfumeName;
+	public Perfume(PerfumeName name, Brand brand, PerfumeVolume volume, PerfumeType type, List<Offer> offers) {
+		this.name = name;
 		this.brand = brand;
 		this.volume = volume;
 		this.type = type;
@@ -52,8 +52,12 @@ public class Perfume {
 		this.id = id;
 	}
 	
-	public void setName(String perfumeName) {
-		this.name = perfumeName;
+	public PerfumeName getName() {
+		return name;
+	}
+	
+	public void setName(PerfumeName name) {
+		this.name = name;
 	}
 	
 	public void setBrand(Brand brand) {
@@ -76,9 +80,7 @@ public class Perfume {
 		return id;
 	}
 	
-	public String getName() {
-		return name;
-	}
+
 	
 	public Brand getBrand() {
 		return brand;

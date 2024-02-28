@@ -5,7 +5,7 @@ import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProce
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.logging.Logger;
 @RestController
 @RequestMapping("/perfume")
 public class PerfumeData {
@@ -20,9 +20,11 @@ public class PerfumeData {
 	@PostMapping()
 	public ResponseEntity<String> createPerfumeData(@RequestBody UrlRequest urlRequest){
 		try{
+			long startTime = (System.currentTimeMillis());
 			perfumeDataProcessingPipelineService.processAndSavePerfumeDataFromUrl(urlRequest.getUrl());
+			long executionTime = (System.currentTimeMillis() - startTime);
 			
-			return ResponseEntity.ok("Data persisted successfully for URL:" + urlRequest.getUrl());
+			return ResponseEntity.ok("Ex time - "+ executionTime +".Data persisted successfully for URL:" + urlRequest.getUrl());
 		
 		}catch (Exception e){
 			e.printStackTrace();

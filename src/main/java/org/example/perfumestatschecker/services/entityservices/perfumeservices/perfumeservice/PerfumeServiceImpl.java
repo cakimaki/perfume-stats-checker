@@ -3,10 +3,7 @@ package org.example.perfumestatschecker.services.entityservices.perfumeservices.
 
 import org.example.perfumestatschecker.dtos.getdtos.PerfumeDetailsDto;
 import org.example.perfumestatschecker.dtos.PerfumeMapper;
-import org.example.perfumestatschecker.models.perfume.Brand;
-import org.example.perfumestatschecker.models.perfume.Perfume;
-import org.example.perfumestatschecker.models.perfume.PerfumeType;
-import org.example.perfumestatschecker.models.perfume.PerfumeVolume;
+import org.example.perfumestatschecker.models.perfume.*;
 import org.example.perfumestatschecker.repositories.perfume.PerfumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +24,14 @@ public class PerfumeServiceImpl implements PerfumeService {
 		this.perfumeRepository=perfumeRepository;
 		this.perfumeMapper = perfumeMapper;
 	}
-	public boolean perfumeExists(String name, Brand brand, PerfumeType type, PerfumeVolume volume) {
+	public boolean perfumeExists(PerfumeName name, Brand brand, PerfumeType type, PerfumeVolume volume) {
 		Optional<Perfume> existingPerfume = perfumeRepository.findByNameAndVolumeAndType(name, brand, type, volume);
 		return existingPerfume.isPresent();
 	}
 	
 	@Transactional
 	@Override
-	public Perfume findOrCreatePerfume(String name, Brand brand, PerfumeType type, PerfumeVolume volume){
+	public Perfume findOrCreatePerfume(PerfumeName name, Brand brand, PerfumeType type, PerfumeVolume volume){
 		Optional<Perfume> existingPerfume = perfumeRepository.findByNameAndVolumeAndType(name,brand,type,volume);
 		if (existingPerfume.isPresent()) {
 			// Return the existing perfume if found

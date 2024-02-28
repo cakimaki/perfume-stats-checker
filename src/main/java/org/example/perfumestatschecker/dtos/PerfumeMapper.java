@@ -9,7 +9,7 @@ public class PerfumeMapper {
 	
 	public PerfumeDetailsDto convertToDto(Perfume perfume){
 		PerfumeDetailsDto dto = new PerfumeDetailsDto();
-		dto.setPerfumeName(perfume.getName());
+		dto.setPerfumeName(perfume.getName().getName());
 		dto.setBrandName(perfume.getBrand().getName());
 		dto.setType(perfume.getType().getName());
 		dto.setVolume(perfume.getVolume().getName());

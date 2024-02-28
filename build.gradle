@@ -18,6 +18,8 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//jakarta
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -34,6 +36,7 @@ dependencies {
 	//jsoup
 	implementation 'org.jsoup:jsoup:1.17.2'
 
+	implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
 tasks.named('test') {

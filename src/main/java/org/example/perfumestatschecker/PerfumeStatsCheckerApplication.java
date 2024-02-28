@@ -1,37 +1,31 @@
 package org.example.perfumestatschecker;
 
-import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.services.dataintegration.storingdata.PerfumeDataSavingService;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParsingStrategy;
 
 
-import org.example.perfumestatschecker.services.dataintegration.webdriver.WebContentFetcher;
+import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 @SpringBootApplication
 public class PerfumeStatsCheckerApplication implements CommandLineRunner {
 	
 	
-	@Autowired
+	/*@Autowired
 	private WebContentFetcher webContentFetcher;
 	@Autowired
 	private PerfumeDataSavingService perfumeDataSavingService;
 	@Autowired
 	@Qualifier("NotinoProcessingStrategy")
-	private DataParsingStrategy notinoProcessingStrategy;
+	private DataParsingStrategy notinoProcessingStrategy;*/
 	public static void main(String[] args) {
 		SpringApplication.run(PerfumeStatsCheckerApplication.class, args);
 	}
 	
-	@Override
 	public void run(String... args) throws Exception {
 		//System.out.println("Echo");
 		//jsonProcessingService.processJsonFromUrl("https://www.notino.bg/tom-ford/eau-de-soleil-blanc-toaletna-voda-uniseks/p-16097522/");

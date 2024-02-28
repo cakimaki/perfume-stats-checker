@@ -1,7 +1,10 @@
 package org.example.perfumestatschecker.models.account;
 
-import com.google.j2objc.annotations.OnDealloc;
+
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table
 @Entity(name = "user")
@@ -16,4 +19,9 @@ public class User {
 	@Column(name = "password")
 	private String password;
 	
+	@OneToMany(mappedBy = "user")
+	private List<UserRole> userRoles = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Account> accounts = new ArrayList<>();
 }
