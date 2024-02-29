@@ -33,8 +33,9 @@ public class PerfumeDataProcessingPipelineServiceImpl implements PerfumeDataProc
 		
 		DataParsingStrategy strategy = dataParserSelector.selectStrategy(url);
 		
-		List<FilteredPerfumeDto> dtos = strategy.parseDataStringIntoObject(jsonResponse);
+		List<FilteredPerfumeDto> dtos = strategy.parseDataStringIntoObject(jsonResponse,url);
 		
 		perfumeDataSavingService.persistFilteredPerfumeData(dtos);
 	}
+	
 }

@@ -12,7 +12,7 @@ public class chromeDriverTest {
 		System.setProperty("chromedriver.exe", "C:/Users/Yordan/Documents/GitHub/perfume-stats-checker/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		
-		driver.get("http://www.google.com/");
+		driver.get("https://bot.sannysoft.com");
 		
 		Thread.sleep(5000);  // Let the user actually see something!
 		

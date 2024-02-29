@@ -16,7 +16,7 @@ todo---------------------------------
 */
 
 	@Override
-	public List<FilteredPerfumeDto> parseDataStringIntoObject(String jsonResponse){
+	public List<FilteredPerfumeDto> parseDataStringIntoObject(String jsonResponse,String url){
 		return null;
 		
 	}

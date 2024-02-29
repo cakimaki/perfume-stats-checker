@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class NotinoDataParser implements DataParsingStrategy {
 	
 	@Override
-	public List<FilteredPerfumeDto> parseDataStringIntoObject(String jsonResponse) {
+	public List<FilteredPerfumeDto> parseDataStringIntoObject(String jsonResponse,String url) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<FilteredPerfumeDto> filteredPerfumeDtos = new ArrayList<>();
 		try {
@@ -31,7 +31,7 @@ public class NotinoDataParser implements DataParsingStrategy {
 				filteredPerfumeDto.setName(extractName(offer.getName()));
 				filteredPerfumeDto.setPrice(offer.getPrice());
 				filteredPerfumeDto.setSite(extractSiteName(perfumeDetails.getId()));
-				filteredPerfumeDto.setUrl(offer.getUrl());
+				filteredPerfumeDto.setUrl(url);
 				filteredPerfumeDto.setStock(checkAvailability(offer.getAvailability()));
 				filteredPerfumeDto.setDiscount(""); //empty...
 				filteredPerfumeDto.setVolume(extractVolume(offer.getName()));
