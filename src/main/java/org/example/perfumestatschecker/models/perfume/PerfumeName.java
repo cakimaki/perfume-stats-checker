@@ -48,4 +48,5 @@ public class PerfumeName {
 	public void setPerfumes(List<Perfume> perfumes) {
 		this.perfumes = perfumes;
 	}
+	
 }

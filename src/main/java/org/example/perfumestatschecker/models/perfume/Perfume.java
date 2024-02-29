@@ -48,6 +48,10 @@ public class Perfume {
 		this.offers = offers;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -60,41 +64,35 @@ public class Perfume {
 		this.name = name;
 	}
 	
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-	
-	public void setVolume(PerfumeVolume volume) {
-		this.volume = volume;
-	}
-	
-	public void setType(PerfumeType type) {
-		this.type = type;
-	}
-	
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-
-	
 	public Brand getBrand() {
 		return brand;
+	}
+	
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 	
 	public PerfumeVolume getVolume() {
 		return volume;
 	}
 	
+	public void setVolume(PerfumeVolume volume) {
+		this.volume = volume;
+	}
+	
 	public PerfumeType getType() {
 		return type;
 	}
 	
+	public void setType(PerfumeType type) {
+		this.type = type;
+	}
+	
 	public List<Offer> getOffers() {
 		return offers;
+	}
+	
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
 }

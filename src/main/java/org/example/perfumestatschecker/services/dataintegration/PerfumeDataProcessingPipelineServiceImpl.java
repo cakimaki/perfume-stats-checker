@@ -3,7 +3,7 @@ package org.example.perfumestatschecker.services.dataintegration;
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParserSelector;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParsingStrategy;
-import org.example.perfumestatschecker.services.dataintegration.webdriver.FetcherService;
+
 import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
 import org.example.perfumestatschecker.services.dataintegration.storingdata.PerfumeDataSavingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,13 @@ public class PerfumeDataProcessingPipelineServiceImpl implements PerfumeDataProc
 	private final WebContentFetcher webContentFetcher;
 	private final DataParserSelector dataParserSelector;
 	private final PerfumeDataSavingService perfumeDataSavingService;
-    private final FetcherService fetcherService;
+ 
 	@Autowired
-	public PerfumeDataProcessingPipelineServiceImpl(WebContentFetcher webContentFetcher, DataParserSelector dataParserSelector, PerfumeDataSavingService perfumeDataSavingService, FetcherService fetcherService) {
+	public PerfumeDataProcessingPipelineServiceImpl(WebContentFetcher webContentFetcher, DataParserSelector dataParserSelector, PerfumeDataSavingService perfumeDataSavingService) {
 		this.webContentFetcher = webContentFetcher;
 		this.dataParserSelector = dataParserSelector;
 		this.perfumeDataSavingService = perfumeDataSavingService;
-		this.fetcherService = fetcherService;
+		
 	}
 	
 	@Transactional

@@ -1,5 +1,6 @@
-package org.example.perfumestatschecker.services.dataintegration.webdriver;
+package org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn;
 
+import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +27,9 @@ public class WebContentFetcherImpl implements WebContentFetcher {
 		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 		
 		ChromeOptions options = new ChromeOptions();
-		// options.addArguments("--headless"); // Uncomment to run in headless mode
+		//options.addArguments("--headless");
+		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
+		
 		WebDriver driver = new ChromeDriver(options);
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15)); // wait for a maximum of 10 seconds

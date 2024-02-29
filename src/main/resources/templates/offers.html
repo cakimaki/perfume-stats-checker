@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Offers</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Perfume Offers</h2>
+    <div id="offersContainer">
+
+    </div>
+</div>
+
+<script>
+    // Function to fetch offer details and display them
+    function fetchOffers() {
+        fetch('http://localhost:8989/api/offer') // Adjust the URL based on get offers api
+            .then(response => response.json())
+            .then(offers => {
+                const offersContainer = document.getElementById('offersContainer');
+                offersContainer.innerHTML = ''; // Clear existing offers
+                offers.forEach(offer => {
+                    const offerElement = document.createElement('div');
+                    offerElement.classList.add('card', 'mb-3');
+                    offerElement.innerHTML = `
+                            <div class="card-body">
+                                <h5 class="card-title">${offer.perfumeName} by ${offer.brandName}</h5>
+                                <p class="card-text">Type: ${offer.perfumeType}</p>
+                                <p class="card-text">Volume: ${offer.volume}ml</p>
+                                <p class="card-text">Price: ${offer.price}</p>
+                                <p class="card-text">Price: ${offer.price}</p>
+                                <p class="card-text">Price: ${offer.price}</p>
+                                <p class="card-text">Status: ${offer.stockStatus}</p>
+                                <a href="${offer.offerUrl}" class="btn btn-primary">Buy Now</a>
+                            </div>
+                        `;
+                    offersContainer.appendChild(offerElement);
+                });
+            })
+            .catch(error => console.error('Error fetching offers:', error));
+    }
+
+    // Fetch offers when the page loads
+    document.addEventListener('DOMContentLoaded', fetchOffers);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.5/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
