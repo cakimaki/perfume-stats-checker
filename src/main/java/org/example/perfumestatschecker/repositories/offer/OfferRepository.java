@@ -18,7 +18,47 @@ public interface OfferRepository extends JpaRepository<Offer,Long> {
 			"pt.name as perfumeType, v.name as volume, pr.price as price, pr.discountPercent as discountPercent," +
 			"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice," +
 			"ss.name as stockStatus, os.firstTimeOfCheck as firstTimeOfCheck, os.lastTimeOfCheck as lastTimeOfCheck " +
-			"FROM Offer o JOIN o.perfume p JOIN p.name pn JOIN  p.brand b JOIN p.type pt JOIN p.volume v JOIN o.offerStatuses os " +
-			"JOIN os.price pr JOIN os.stockStatus ss WHERE os.lastStatus = true")
+			"FROM Offer o " +
+			"JOIN o.perfume p " +
+			"JOIN p.name pn " +
+			"JOIN  p.brand b " +
+			"JOIN p.type pt " +
+			"JOIN p.volume v " +
+			"JOIN o.offerStatuses os " +
+			"JOIN os.price pr " +
+			"JOIN os.stockStatus ss " +
+			"WHERE os.lastStatus = true")
 	List<OfferProjectionDto> findOfferDetailsWithLastStatus();
+	
+	@Query("SELECT o.site as site, o.offerUrl as offerUrl, pn.name as perfumeName, b.name as brandName, " +
+			"pt.name as perfumeType, v.name as volume, pr.price as price, pr.discountPercent as discountPercent," +
+			"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice," +
+			"ss.name as stockStatus, os.firstTimeOfCheck as firstTimeOfCheck, os.lastTimeOfCheck as lastTimeOfCheck " +
+			"FROM Offer o " +
+			"JOIN o.perfume p " +
+			"JOIN p.name pn " +
+			"JOIN  p.brand b " +
+			"JOIN p.type pt " +
+			"JOIN p.volume v " +
+			"JOIN o.offerStatuses os " +
+			"JOIN os.price pr " +
+			"JOIN os.stockStatus ss " +
+			"WHERE os.lastStatus = true AND pn.id = :id")
+	List<OfferProjectionDto> findOfferDetailsByPerfumeId(Long id);
+	
+	@Query("SELECT o.site as site, o.offerUrl as offerUrl, pn.name as perfumeName, b.name as brandName, " +
+			"pt.name as perfumeType, v.name as volume, pr.price as price, pr.discountPercent as discountPercent," +
+			"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice," +
+			"ss.name as stockStatus, os.firstTimeOfCheck as firstTimeOfCheck, os.lastTimeOfCheck as lastTimeOfCheck " +
+			"FROM Offer o " +
+			"JOIN o.perfume p " +
+			"JOIN p.name pn " +
+			"JOIN  p.brand b " +
+			"JOIN p.type pt " +
+			"JOIN p.volume v " +
+			"JOIN o.offerStatuses os " +
+			"JOIN os.price pr " +
+			"JOIN os.stockStatus ss " +
+			"WHERE os.lastStatus = true AND pn.name = :name")
+	List<OfferProjectionDto> findOfferDetailsByPerfumeName(String name);
 }

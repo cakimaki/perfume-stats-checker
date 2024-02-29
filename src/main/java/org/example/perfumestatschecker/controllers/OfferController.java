@@ -4,10 +4,7 @@ import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerservice.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,14 @@ public class OfferController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<OfferProjectionDto>> getOfferDetails(){
+	public ResponseEntity<List<OfferProjectionDto>> getAllOffersDetails(){
 		List<OfferProjectionDto> offerProjectionDtos = offerService.getOfferDetails();
+		return ResponseEntity.ok(offerProjectionDtos);
+	}
+	
+	@GetMapping("byperfume/{perfumeId}")
+	public ResponseEntity<List<OfferProjectionDto>> getOfferDetailsForPerfume(@PathVariable Long perfumeId){
+		List<OfferProjectionDto> offerProjectionDtos = offerService.getPerfumeOffersById(perfumeId);
 		return ResponseEntity.ok(offerProjectionDtos);
 	}
 	

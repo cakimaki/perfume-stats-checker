@@ -14,4 +14,6 @@ public interface OfferService {
 	Offer createOrUpdateOffer(FilteredPerfumeDto dto, Perfume perfume);
 	
 	List<OfferProjectionDto> getOfferDetails();
+	
+	List<OfferProjectionDto> getPerfumeOffersById(Long perfumeId);
 }

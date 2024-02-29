@@ -42,27 +42,22 @@
 <script>
     // Function to fetch offer details and display them
     function fetchOffers() {
-        fetch('http://localhost:8989/api/offer') // Adjust the URL based on get offers api
+        fetch('http://localhost:8989/api/perfumes/names') // Adjust the URL based on get offers api
             .then(response => response.json())
-            .then(offers => {
+            .then(perfumes => {
                 const offersContainer = document.getElementById('offersContainer');
-                offersContainer.innerHTML = ''; // Clear existing offers
-                offers.forEach(offer => {
+                offersContainer.innerHTML = ''; // Clear existing perfumes
+                perfumes.forEach(perfume => {
                     const offerElement = document.createElement('div');
                     offerElement.classList.add('card', 'mb-3');
                     offerElement.innerHTML = `
     <div class="card-body">
+           <h5 class="card-title">
+            <a class="perfume-link">${perfume.brandName}</a>
+        </h5>
        <h6 class="card-title">
-            <a href="${offer.offerUrl}" class="perfume-link">${offer.perfumeName} by ${offer.brandName}</a>
+            <a href="${perfume.offerUrl}" class="perfume-link">${perfume.perfumeName}</a>
         </h6>
-        <p class="card-text">Type: ${offer.perfumeType}</p>
-        <p class="card-text">Volume: ${offer.volume}ml</p>
-        <p class="card-text">Price: ${offer.price}лв.</p>
-        ${offer.lastPrice ? `<p class="card-text">Last Price: ${offer.lastPrice} лв.</p>` : ''}
-        ${offer.percentDifferenceFromLastPrice ? `<p style="color:#4dd72e"; class="card-text">Percent from last price: ${offer.percentDifferenceFromLastPrice}%</p>` : ''}
-        ${offer.discountPercent !== null ? `<p class="card-text">Discount: ${offer.discountPercent}%</p>` : ''}
-        <p class="card-text">Status: ${offer.stockStatus}</p>
-        <p class="card-text">Checked: ${new Date(offer.lastTimeOfCheck).toLocaleString()}</p>
             </div>
 `;
                     offersContainer.appendChild(offerElement);

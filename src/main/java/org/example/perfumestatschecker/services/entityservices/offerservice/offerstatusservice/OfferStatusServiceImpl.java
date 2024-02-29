@@ -49,6 +49,7 @@ public class OfferStatusServiceImpl implements OfferStatusService {
 			newStatus.setOffer(offer);
 			newStatus.setPrice(price);
 			newStatus.setStockStatus(stockStatus);
+			newStatus.setLastTimeOfCheck(LocalDateTime.now());
 			newStatus.setLastStatus(true); // This is now the latest status
 			
 			//assign saved status to return value

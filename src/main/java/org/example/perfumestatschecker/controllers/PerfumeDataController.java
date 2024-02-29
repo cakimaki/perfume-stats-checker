@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/perfume")
+@RequestMapping("/api/perfume")
 public class PerfumeDataController {
 
 	private final PerfumeDataProcessingPipelineService perfumeDataProcessingPipelineService;

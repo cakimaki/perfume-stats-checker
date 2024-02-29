@@ -54,7 +54,7 @@ public class PerfumeServiceImpl implements PerfumeService {
 		return perfumeRepository.findAll().stream().map(perfumeMapper::convertToDto).collect(Collectors.toList());
 	}
 	
-	/*public PerfumeDetailsDto getPerfumeById(Long id){
+	/*public PerfumeDetailsDto getPerfumeById(String name){
 	
 	}*/
 }
