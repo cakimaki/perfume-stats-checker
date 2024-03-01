@@ -22,7 +22,7 @@ public class PerfumeMapper {
 		PerfumeDto dto = new PerfumeDto();
 		dto.setId(perfume.getId());
 		dto.setPerfumeName(perfume.getName());
-		
+		dto.setBrandName(perfume.getBrand().getName());
 		return dto;
 	}
 }
