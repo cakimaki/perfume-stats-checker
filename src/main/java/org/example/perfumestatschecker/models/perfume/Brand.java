@@ -2,7 +2,6 @@ package org.example.perfumestatschecker.models.perfume;
 
 
 import jakarta.persistence.*;
-import org.example.perfumestatschecker.models.perfume.Perfume;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class Brand {
 		this.name = brandName;
 	}
 	
-	public void setPerfumes(List<Perfume> perfumes) {
+	public void setPerfumeNames(List<Perfume> perfumes) {
 		this.perfumes = perfumes;
 	}
 	
@@ -47,7 +46,7 @@ public class Brand {
 		return name;
 	}
 	
-	public List<Perfume> getPerfumes() {
+	public List<Perfume> getPerfumeNames() {
 		return perfumes;
 	}
 }

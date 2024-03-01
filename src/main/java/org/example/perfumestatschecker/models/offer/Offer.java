@@ -3,6 +3,7 @@ package org.example.perfumestatschecker.models.offer;
 
 import jakarta.persistence.*;
 import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ public class Offer {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "perfume_id")
-	private Perfume perfume;
+	@JoinColumn(name = "perfume_variant_id")
+	private PerfumeVariant perfumeVariant;
 	
 	@OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
@@ -33,12 +34,20 @@ public class Offer {
 	
 	public Offer(){}
 	
-	public Perfume getPerfume() {
-		return perfume;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setPerfume(Perfume perfume) {
-		this.perfume = perfume;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public PerfumeVariant getPerfumeVariant() {
+		return perfumeVariant;
+	}
+	
+	public void setPerfumeVariant(PerfumeVariant perfumeVariant) {
+		this.perfumeVariant = perfumeVariant;
 	}
 	
 	public List<OfferStatus> getOfferStatuses() {

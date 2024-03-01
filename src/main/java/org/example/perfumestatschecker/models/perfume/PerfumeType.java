@@ -1,7 +1,6 @@
 package org.example.perfumestatschecker.models.perfume;
 
 import jakarta.persistence.*;
-import org.example.perfumestatschecker.models.perfume.Perfume;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class PerfumeType {
 	private String name;
 	
 	@OneToMany(mappedBy = "type")
-	private List<Perfume> perfumes;
+	private List<PerfumeVariant> perfumesVariants;
 	
 	public String getName() {
 		return name;

@@ -1,27 +1,27 @@
 package org.example.perfumestatschecker.dtos;
 
-import org.example.perfumestatschecker.dtos.getdtos.PerfumeDetailsDto;
+import org.example.perfumestatschecker.dtos.getdtos.PerfumeVariantDetailsDto;
 import org.example.perfumestatschecker.models.perfume.Perfume;
-import org.example.perfumestatschecker.models.perfume.PerfumeName;
+import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PerfumeMapper {
 	
-	public PerfumeDetailsDto convertToDto(Perfume perfume){
-		PerfumeDetailsDto dto = new PerfumeDetailsDto();
-		dto.setPerfumeName(perfume.getName().getName());
-		dto.setBrandName(perfume.getBrand().getName());
-		dto.setType(perfume.getType().getName());
-		dto.setVolume(perfume.getVolume().getName());
+	public PerfumeVariantDetailsDto convertToDto(PerfumeVariant perfumeVariant){
+		PerfumeVariantDetailsDto dto = new PerfumeVariantDetailsDto();
+		dto.setPerfumeName(perfumeVariant.getPerfume().getName());
+		dto.setBrandName(perfumeVariant.getPerfume().getBrand().getName());
+		dto.setType(perfumeVariant.getType().getName());
+		dto.setVolume(perfumeVariant.getVolume().getName());
 		
 		return dto;
 	}
 	
-	public PerfumeNameDto convertToDto(PerfumeName perfumeName){
-		PerfumeNameDto dto = new PerfumeNameDto();
-		dto.setId(perfumeName.getId());
-		dto.setPerfumeName(perfumeName.getName());
+	public PerfumeDto convertToDto(Perfume perfume){
+		PerfumeDto dto = new PerfumeDto();
+		dto.setId(perfume.getId());
+		dto.setPerfumeName(perfume.getName());
 		
 		return dto;
 	}

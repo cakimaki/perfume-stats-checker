@@ -1,10 +1,9 @@
 package org.example.perfumestatschecker.controllers;
 
-import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.dtos.PerfumeNameDto;
-import org.example.perfumestatschecker.dtos.getdtos.PerfumeDetailsDto;
-import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumenameservice.PerfumeNameService;
-import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice.PerfumeService;
+import org.example.perfumestatschecker.dtos.PerfumeDto;
+import org.example.perfumestatschecker.dtos.getdtos.PerfumeVariantDetailsDto;
+import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumenameservice.PerfumeService;
+import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice.PerfumeVariantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +15,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/perfumes")
 public class PerfumeController {
+	private final PerfumeVariantService perfumeVariantService;
 	private final PerfumeService perfumeService;
-	private final PerfumeNameService perfumeNameService;
 	@Autowired
-	public PerfumeController(PerfumeService perfumeService, PerfumeNameService perfumeNameService){
+	public PerfumeController(PerfumeVariantService perfumeVariantService, PerfumeService perfumeService){
+		this.perfumeVariantService = perfumeVariantService;
 		this.perfumeService = perfumeService;
-		this.perfumeNameService = perfumeNameService;
 	}
 	
 	@GetMapping()
 	public ResponseEntity<?> getAllPerfumes(){
 		try {
-			List<PerfumeDetailsDto> perfumes =  perfumeService.getAllPerfumesDetails();
+			List<PerfumeVariantDetailsDto> perfumes =  perfumeVariantService.getAllPerfumeVariantsDetails();
 			if(perfumes.isEmpty()){
 				return ResponseEntity.ok().body("No perfumes to be found in db.");
 			}
@@ -40,7 +39,7 @@ public class PerfumeController {
 	@GetMapping("/names")
 	public ResponseEntity<?> getAllPerfumeNames(){
 		try {
-			List<PerfumeNameDto> perfumeNames =  perfumeNameService.getAllPerfumeNames();
+			List<PerfumeDto> perfumeNames =  perfumeService.getAllPerfumeNames();
 			if(perfumeNames.isEmpty()){
 				return ResponseEntity.ok().body("No perfumes to be found in db.");
 			}

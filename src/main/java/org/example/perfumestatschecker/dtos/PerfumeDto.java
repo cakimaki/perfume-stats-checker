@@ -1,6 +1,6 @@
 package org.example.perfumestatschecker.dtos;
 
-public class PerfumeNameDto {
+public class PerfumeDto {
 	private Long id;
 	private String perfumeName;
 	

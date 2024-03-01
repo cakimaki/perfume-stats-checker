@@ -2,7 +2,6 @@ package org.example.perfumestatschecker.models.perfume;
 
 
 import jakarta.persistence.*;
-import org.example.perfumestatschecker.models.perfume.Perfume;
 
 import java.util.List;
 
@@ -17,7 +16,13 @@ public class PerfumeVolume {
 	private String name;
 	
 	@OneToMany(mappedBy = "volume")
-	private List<Perfume> perfumes;
+	private List<PerfumeVariant> perfumeVariant;
+	
+	public PerfumeVolume(){}
+	public PerfumeVolume(String name, List<PerfumeVariant> perfumeVariant) {
+		this.name = name;
+		this.perfumeVariant = perfumeVariant;
+	}
 	
 	public String getName() {
 		return name;
@@ -27,11 +32,19 @@ public class PerfumeVolume {
 		this.name = name;
 	}
 	
-	public List<Perfume> getPerfumes() {
-		return perfumes;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setPerfumes(List<Perfume> perfumes) {
-		this.perfumes = perfumes;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public List<PerfumeVariant> getPerfumeVariant() {
+		return perfumeVariant;
+	}
+	
+	public void setPerfumeVariant(List<PerfumeVariant> perfumeVariant) {
+		this.perfumeVariant = perfumeVariant;
 	}
 }

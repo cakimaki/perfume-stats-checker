@@ -10,8 +10,8 @@ import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.brandservice.BrandService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerstatusservice.OfferStatusService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerservice.OfferService;
-import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumenameservice.PerfumeNameService;
-import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice.PerfumeService;
+import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumenameservice.PerfumeService;
+import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumeservice.PerfumeVariantService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumetypeservice.PerfumeTypeService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.perfumevolumeservice.PerfumeVolumeService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.priceservice.PriceService;
@@ -32,10 +32,10 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 	private final PerfumeTypeService perfumeTypeService;
 	
 	private final PerfumeVolumeService perfumeVolumeService;
-	private final PerfumeNameService perfumeNameService;
+	private final PerfumeService perfumeService;
 	private final OfferRepository offerRepository;
 	
-	private final PerfumeService perfumeService;
+	private final PerfumeVariantService perfumeVariantService;
 	private final OfferService offerService;
 	private final OfferStatusService offerStatusService;
 	
@@ -49,20 +49,20 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 	@Autowired
 	public PerfumeDataSavingServiceImpl(BrandService brandService, PerfumeTypeService perfumeTypeService,
 	                                    PerfumeVolumeService perfumeVolumeService, OfferRepository offerRepository,
-	                                    PerfumeService perfumeService, OfferService offerService, OfferStatusService offerStatusService,
+	                                    PerfumeVariantService perfumeVariantService, OfferService offerService, OfferStatusService offerStatusService,
 	                                    PriceService priceService, ConversionService conversionService, StockStatusService stockStatusService,
-	                                    PerfumeNameService perfumeNameService) {
+	                                    PerfumeService perfumeService) {
 		this.brandService = brandService;
 		this.perfumeTypeService = perfumeTypeService;
 		this.perfumeVolumeService = perfumeVolumeService;
 		this.offerRepository = offerRepository;
-		this.perfumeService = perfumeService;
+		this.perfumeVariantService = perfumeVariantService;
 		this.offerService = offerService;
 		this.offerStatusService = offerStatusService;
 		this.priceService = priceService;
 		this.conversionService= conversionService;
 		this.stockStatusService = stockStatusService;
-		this.perfumeNameService = perfumeNameService;
+		this.perfumeService = perfumeService;
 	}
 	
 	//Saving the filtered object into the database
@@ -74,12 +74,14 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 			Brand brand = brandService.findOrCreate(dto.getBrand());
 			PerfumeType perfumeType = perfumeTypeService.findOrCreatePerfumeType(dto.getType());
 			PerfumeVolume volume = perfumeVolumeService.findOrCreateVolume(dto.getVolume());
-			PerfumeName perfumeName = perfumeNameService.findOrCreatePerfumeName(dto.getName());
-			//perfume entity
-			Perfume perfume = perfumeService.findOrCreatePerfume(perfumeName, brand, perfumeType, volume);
+			
+			//perfume name with brand
+			Perfume perfume = perfumeService.findOrCreatePerfume(dto.getName(),brand);
+			//perfume variant entity (volume and ptype (edt/edp))
+			PerfumeVariant perfumeVariant = perfumeVariantService.findOrCreatePerfumeVariant(perfume, perfumeType, volume);
 			
 			//offer entity - perfumeId, site, url- if perfumeid&&site exist just create timecheck
-			Offer offer = offerService.createOrUpdateOffer(dto, perfume);
+			Offer offer = offerService.createOrUpdateOffer(dto, perfumeVariant);
 			
 			//new price, send the offer if you need to get previous price
 			Price price = priceService.createOrUpdate(convertToDouble(dto.getPrice()), offer);

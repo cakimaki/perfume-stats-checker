@@ -1,67 +1,33 @@
 package org.example.perfumestatschecker.models.perfume;
 
 import jakarta.persistence.*;
-import org.example.perfumestatschecker.models.offer.Offer;
 
 import java.util.List;
 
 @Entity
-@Table(name = "perfume")
+@Table(name = "perfume_name")
 public class Perfume {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	//name of perfume
-	@ManyToOne
-	@JoinColumn(name = "perfumename_id")
-	private PerfumeName name;
+	@Column(name = "perfume_name")
+	private String name;
+	
+	@OneToMany(mappedBy = "name")
+	private List<Perfume> perfumes;
 	
 	//brand name of perfume
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
 	private Brand brand;
 	
-	//volume of perfume
-	@ManyToOne
-	@JoinColumn(name = "volume_id")
-	private PerfumeVolume volume;
+	public Perfume(){
 	
-	//type of perfume
-	@ManyToOne
-	@JoinColumn(name = "type_id")
-	private PerfumeType type;
-	
-	//offers of perfume
-	@OneToMany(mappedBy = "perfume")
-	private List<Offer> offers;
-	
-	public Perfume() {
 	}
-	
-	public Perfume(PerfumeName name, Brand brand, PerfumeVolume volume, PerfumeType type, List<Offer> offers) {
+	public Perfume(String name, List<Perfume> perfumes) {
 		this.name = name;
-		this.brand = brand;
-		this.volume = volume;
-		this.type = type;
-		this.offers = offers;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public PerfumeName getName() {
-		return name;
-	}
-	
-	public void setName(PerfumeName name) {
-		this.name = name;
+		this.perfumes = perfumes;
 	}
 	
 	public Brand getBrand() {
@@ -72,27 +38,28 @@ public class Perfume {
 		this.brand = brand;
 	}
 	
-	public PerfumeVolume getVolume() {
-		return volume;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setVolume(PerfumeVolume volume) {
-		this.volume = volume;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
-	public PerfumeType getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 	
-	public void setType(PerfumeType type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public List<Offer> getOffers() {
-		return offers;
+	public List<Perfume> getPerfumes() {
+		return perfumes;
 	}
 	
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+	public void setPerfumes(List<Perfume> perfumes) {
+		this.perfumes = perfumes;
 	}
+	
 }

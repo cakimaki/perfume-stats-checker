@@ -4,6 +4,7 @@ import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.models.offer.Offer;
 import org.example.perfumestatschecker.models.perfume.Perfume;
+import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +22,16 @@ public class OfferServiceImpl implements OfferService {
 	
 	@Transactional
 	@Override
-	public Offer createOrUpdateOffer(FilteredPerfumeDto dto, Perfume perfume) {
+	public Offer createOrUpdateOffer(FilteredPerfumeDto dto, PerfumeVariant perfumeVariant) {
 		
-		Optional<Offer> existingOfferOpt = offerRepository.findByPerfumeAndSiteAndOfferUrl(perfume, dto.getSite(), dto.getUrl());
+		Optional<Offer> existingOfferOpt = offerRepository.findByPerfumeVariantAndSiteAndOfferUrl(perfumeVariant, dto.getSite(), dto.getUrl());
 		
 		Offer offer;
 		if (existingOfferOpt.isPresent()) {
 			return existingOfferOpt.get();
 		} else {
 			offer = new Offer();
-			offer.setPerfume(perfume);
+			offer.setPerfumeVariant(perfumeVariant);
 			offer.setOfferUrl(dto.getUrl());
 			offer.setSite(dto.getSite());
 			offer.setImageUrl(dto.getUrlToImage());
