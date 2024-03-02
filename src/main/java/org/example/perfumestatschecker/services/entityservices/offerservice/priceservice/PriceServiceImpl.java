@@ -32,7 +32,8 @@ public class PriceServiceImpl implements PriceService{
 		}else{
 			Price price = new Price();
 			price.setPrice(priceNumber);
-			//find the existing
+			price.setPricePerMl(calculatePricePer1Ml(priceNumber,offer.getPerfumeVariant().getVolume().getName()));
+			//find the existing offer and set lastPrice in the new
 			OfferStatus offerStatus = offerStatusRepository.findOfferStatusByOfferAndLastStatusTrue(offer);
 			if(offerStatus != null) {
 				price.setLastPrice(offerStatus.getPrice().getPrice());
@@ -42,6 +43,9 @@ public class PriceServiceImpl implements PriceService{
 		}
 	}
 	
+	public Double calculatePricePer1Ml(Double price, String ml){
+		return price / Double.parseDouble(ml);
+	}
 	public Integer calculatePercentDifferenceFromLastPrice(Double newprice, Double lastprice){
 		return (Integer) (int) (((newprice*100)/ lastprice) -100);
 	}

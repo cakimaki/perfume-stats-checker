@@ -22,8 +22,9 @@ public class Offer {
 	@OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
-	@Column(name = "site")
-	private String site;
+	@ManyToOne
+	@JoinColumn(name = "site_id")
+	private Site site;
 	
 	@Column(name = "url_to_offer")
 	private String offerUrl;
@@ -58,11 +59,11 @@ public class Offer {
 		this.offerStatuses = offerStatuses;
 	}
 	
-	public String getSite() {
+	public Site getSite() {
 		return site;
 	}
 	
-	public void setSite(String site) {
+	public void setSite(Site site) {
 		this.site = site;
 	}
 	

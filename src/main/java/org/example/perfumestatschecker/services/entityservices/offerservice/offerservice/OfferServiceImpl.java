@@ -3,6 +3,7 @@ package org.example.perfumestatschecker.services.entityservices.offerservice.off
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.models.offer.Offer;
+import org.example.perfumestatschecker.models.offer.Site;
 import org.example.perfumestatschecker.models.perfume.Perfume;
 import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
@@ -22,9 +23,9 @@ public class OfferServiceImpl implements OfferService {
 	
 	@Transactional
 	@Override
-	public Offer createOrUpdateOffer(FilteredPerfumeDto dto, PerfumeVariant perfumeVariant) {
+	public Offer createOrUpdateOffer(FilteredPerfumeDto dto, PerfumeVariant perfumeVariant, Site site) {
 		
-		Optional<Offer> existingOfferOpt = offerRepository.findByPerfumeVariantAndSiteAndOfferUrl(perfumeVariant, dto.getSite(), dto.getUrl());
+		Optional<Offer> existingOfferOpt = offerRepository.findByPerfumeVariantAndSiteAndOfferUrl(perfumeVariant, site, dto.getUrl());
 		
 		Offer offer;
 		if (existingOfferOpt.isPresent()) {
@@ -33,7 +34,7 @@ public class OfferServiceImpl implements OfferService {
 			offer = new Offer();
 			offer.setPerfumeVariant(perfumeVariant);
 			offer.setOfferUrl(dto.getUrl());
-			offer.setSite(dto.getSite());
+			offer.setSite(site);
 			offer.setImageUrl(dto.getUrlToImage());
 		}
 		

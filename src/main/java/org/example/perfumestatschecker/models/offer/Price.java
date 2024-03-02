@@ -25,7 +25,7 @@ public class Price {
 	private Double priceWithoutDiscount;
 	
 	@Column(name = "price_per_ml")
-	private Integer pricePerMl;
+	private Double pricePerMl;
 	
 	@Column(name = "last_price")
 	private Double lastPrice;
@@ -113,11 +113,11 @@ public class Price {
 		this.priceWithoutDiscount = priceWithoutDiscount;
 	}
 	
-	public Integer getPricePerMl() {
+	public Double getPricePerMl() {
 		return pricePerMl;
 	}
 	
-	public void setPricePerMl(Integer pricePerMl) {
+	public void setPricePerMl(Double pricePerMl) {
 		this.pricePerMl = pricePerMl;
 	}
 }

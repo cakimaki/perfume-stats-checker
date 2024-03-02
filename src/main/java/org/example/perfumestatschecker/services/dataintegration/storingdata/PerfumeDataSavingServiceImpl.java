@@ -1,12 +1,10 @@
 package org.example.perfumestatschecker.services.dataintegration.storingdata;
 
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
-import org.example.perfumestatschecker.models.offer.Offer;
-import org.example.perfumestatschecker.models.offer.OfferStatus;
-import org.example.perfumestatschecker.models.offer.Price;
-import org.example.perfumestatschecker.models.offer.StockStatus;
+import org.example.perfumestatschecker.models.offer.*;
 import org.example.perfumestatschecker.models.perfume.*;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
+import org.example.perfumestatschecker.services.entityservices.offerservice.site.SiteService;
 import org.example.perfumestatschecker.services.entityservices.perfumeservices.brandservice.BrandService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerstatusservice.OfferStatusService;
 import org.example.perfumestatschecker.services.entityservices.offerservice.offerservice.OfferService;
@@ -36,6 +34,7 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 	private final OfferRepository offerRepository;
 	
 	private final PerfumeVariantService perfumeVariantService;
+	private final SiteService siteService;
 	private final OfferService offerService;
 	private final OfferStatusService offerStatusService;
 	
@@ -51,7 +50,7 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 	                                    PerfumeVolumeService perfumeVolumeService, OfferRepository offerRepository,
 	                                    PerfumeVariantService perfumeVariantService, OfferService offerService, OfferStatusService offerStatusService,
 	                                    PriceService priceService, ConversionService conversionService, StockStatusService stockStatusService,
-	                                    PerfumeService perfumeService) {
+	                                    PerfumeService perfumeService, SiteService siteService) {
 		this.brandService = brandService;
 		this.perfumeTypeService = perfumeTypeService;
 		this.perfumeVolumeService = perfumeVolumeService;
@@ -63,6 +62,7 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 		this.conversionService= conversionService;
 		this.stockStatusService = stockStatusService;
 		this.perfumeService = perfumeService;
+		this.siteService = siteService;
 	}
 	
 	//Saving the filtered object into the database
@@ -80,8 +80,10 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 			//perfume variant entity (volume and ptype (edt/edp))
 			PerfumeVariant perfumeVariant = perfumeVariantService.findOrCreatePerfumeVariant(perfume, perfumeType, volume);
 			
+			//site
+			Site site = siteService.createOrUpdateSite(dto.getSite());
 			//offer entity - perfumeId, site, url- if perfumeid&&site exist just create timecheck
-			Offer offer = offerService.createOrUpdateOffer(dto, perfumeVariant);
+			Offer offer = offerService.createOrUpdateOffer(dto, perfumeVariant, site);
 			
 			//new price, send the offer if you need to get previous price
 			Price price = priceService.createOrUpdate(convertToDouble(dto.getPrice()), offer);
