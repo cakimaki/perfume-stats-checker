@@ -29,13 +29,29 @@ public class PerfumeDataProcessingPipelineServiceImpl implements PerfumeDataProc
 	@Transactional
 	@Override
 	public void processAndSavePerfumeDataFromUrl(String url){
-		String jsonResponse = webContentFetcher.fetchJsonFromUrl(url);
 		
+		//either notino or douglas parser chosen
 		DataParsingStrategy strategy = dataParserSelector.selectStrategy(url);
 		
-		List<FilteredPerfumeDto> dtos = strategy.parseDataStringIntoObject(jsonResponse,url);
+		//parse json string into FilteredPerfumeDto
+		List<FilteredPerfumeDto> dtos = strategy.parseDataStringIntoObject(url);
 		
+		//save FilteredPerfumeDto in DataBase
 		perfumeDataSavingService.persistFilteredPerfumeData(dtos);
 	}
 	
+	public void fetchToFilteredPerfumeDtos(String url){
+		//select the strategy from url (notino/douglas fetch&parser)
+		DataParsingStrategy strategyServiceUsed = dataParserSelector.selectStrategy(url);
+		
+		//use the strategy service selected and filled in List of Filtered dtos
+		List<FilteredPerfumeDto> filteredPerfumes = strategyServiceUsed.parseDataStringIntoObject(url);
+	
+		//save filtered perfumes into database
+		perfumeDataSavingService.persistFilteredPerfumeData(filteredPerfumes);
+	
+	}
+	public void saveFilteredPerfumesToDataBase(List<FilteredPerfumeDto> filteredData){
+		perfumeDataSavingService.persistFilteredPerfumeData(filteredData);
+	}
 }

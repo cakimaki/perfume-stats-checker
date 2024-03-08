@@ -59,9 +59,9 @@
         <p class="card-text">Volume: ${offer.volume}ml</p>
         <p class="card-text">Price: ${offer.price}лв.</p>
         ${offer.lastPrice ? `<p class="card-text">Last Price: ${offer.lastPrice} лв.</p>` : ''}
-        ${offer.percentDifferenceFromLastPrice ? `<p style="color:#4dd72e"; class="card-text">Percent from last price: ${offer.percentDifferenceFromLastPrice}%</p>` : ''}
+        ${offer.percentDifferenceFromLastPrice ? `<p style="color: ${offer.percentDifferenceFromLastPrice > 0 ? '#ff0000' : '#4dd72e'};" class="card-text">Percent from last price: ${offer.percentDifferenceFromLastPrice}%</p>` : ''}
         ${offer.discountPercent !== null ? `<p class="card-text">Discount: ${offer.discountPercent}%</p>` : ''}
-        <p class="card-text">Status: ${offer.stockStatus}</p>
+        <p style="color: ${offer.stockStatus === 'Available' ? '#4dd72e' : '#ff0000'};" class="card-text">Status: ${offer.stockStatus}</p>
         <p class="card-text">Checked: ${new Date(offer.lastTimeOfCheck).toLocaleString()}</p>
             </div>
 `;

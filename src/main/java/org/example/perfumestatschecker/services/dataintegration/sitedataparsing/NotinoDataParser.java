@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.dtos.siteextractions.JsonExtractNotino.OfferJson;
 import org.example.perfumestatschecker.dtos.siteextractions.JsonExtractNotino.PerfumeJson;
+import org.example.perfumestatschecker.services.dataintegration.webdriver.webfetcher.webdriver.WebDriverService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
@@ -16,13 +18,37 @@ import java.util.regex.Pattern;
 @Component("NotinoProcessingStrategy")
 public class NotinoDataParser implements DataParsingStrategy {
 	
+	private final WebDriverService webDriverService;
+	
+	@Autowired
+	public NotinoDataParser(WebDriverService webDriverService) {
+		this.webDriverService = webDriverService;
+	}
+	
+	
 	@Override
-	public List<FilteredPerfumeDto> parseDataStringIntoObject(String jsonResponse,String url) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		List<FilteredPerfumeDto> filteredPerfumeDtos = new ArrayList<>();
+	public List<FilteredPerfumeDto> parseDataStringIntoObject(String url) {
+		webDriverService.initializeWebDriver();
+		webDriverService.optionsWait();
+		
+		//fetching the needed content
+		String jsonResponse = webDriverService.fetchContent(
+				url,//----------------------------------------the url to be fetched
+				"//script[@type='application/ld+json']", // wait xpath to be loaded
+				"for (const script of document.querySelectorAll('script[type=\"application/ld+json\"]')) {" +
+						"  if (script.textContent.includes('@type\":\"Product\"')) {" +
+						"    return script.textContent;" +
+						"  }" +
+						"}" +
+						"return '';");//-------------------scrape this path (it has all needed info)
+		
+		webDriverService.closeWebDriver();
+		
+		ObjectMapper objectMapper = new ObjectMapper(); //inject object mapper
+		List<FilteredPerfumeDto> filteredPerfumeDtos = new ArrayList<>(); //create list of Filtered perfumes
 		try {
 			// Parse the JSON string into your PerfumeJson class
-			PerfumeJson perfumeDetails = objectMapper.readValue(jsonResponse, PerfumeJson.class);
+			PerfumeJson perfumeDetails = objectMapper.readValue(jsonResponse, PerfumeJson.class); //import the jsonResponse into custom object specifically like the json
 
 			// Assuming offers is a List and we're interested in the first offer for simplicity
 			for (OfferJson offer : perfumeDetails.getOffers()) {
@@ -46,6 +72,7 @@ public class NotinoDataParser implements DataParsingStrategy {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
+		
 		return filteredPerfumeDtos;
 	}
 	
