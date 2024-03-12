@@ -7,6 +7,7 @@ public class FilteredPerfumeDto {
 	private String volume;
 	private String price;
 	private String discount;
+	private String discountedPrice;
 	private String url;
 	private String site;
 	private String stock;
@@ -15,7 +16,7 @@ public class FilteredPerfumeDto {
 	
 	public FilteredPerfumeDto(){};
 	
-	public FilteredPerfumeDto(String name, String brand, String type, String volume, String price, String discount, String url, String stock) {
+	public FilteredPerfumeDto(String name, String brand, String type, String volume, String price, String discount, String url, String stock, String discountedPrice) {
 		this.name = name;
 		this.brand = brand;
 		this.type = type;
@@ -24,6 +25,15 @@ public class FilteredPerfumeDto {
 		this.discount = discount;
 		this.url = url;
 		this.stock = stock;
+		this.discountedPrice = discountedPrice;
+	}
+	
+	public String getDiscountedPrice() {
+		return discountedPrice;
+	}
+	
+	public void setDiscountedPrice(String discountedPrice) {
+		this.discountedPrice = discountedPrice;
 	}
 	
 	public String getUrlToImage() {

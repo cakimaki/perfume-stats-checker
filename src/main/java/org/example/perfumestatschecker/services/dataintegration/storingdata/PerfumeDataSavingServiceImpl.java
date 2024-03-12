@@ -86,7 +86,7 @@ public class PerfumeDataSavingServiceImpl implements PerfumeDataSavingService {
 			Offer offer = offerService.createOrUpdateOffer(dto, perfumeVariant, site);
 			
 			//new price, send the offer if you need to get previous price
-			Price price = priceService.createOrUpdate(convertToDouble(dto.getPrice()), offer);
+			Price price = priceService.createOrUpdate(dto, offer);
 			StockStatus stockStatus = stockStatusService.findOrCreate(dto.getStock());
 			
 			//offerstatus entity -

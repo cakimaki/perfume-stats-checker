@@ -1,5 +1,6 @@
 package org.example.perfumestatschecker;
 
+import org.example.perfumestatschecker.services.dataintegration.sitebots.FetchPerfumesByBrand;
 import org.example.perfumestatschecker.services.dataintegration.storingdata.PerfumeDataSavingService;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParsingStrategy;
 
@@ -10,6 +11,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @SpringBootApplication
 public class PerfumeStatsCheckerApplication implements CommandLineRunner {
@@ -22,11 +27,15 @@ public class PerfumeStatsCheckerApplication implements CommandLineRunner {
 	@Autowired
 	@Qualifier("NotinoProcessingStrategy")
 	private DataParsingStrategy notinoProcessingStrategy;*/
+	@Autowired
+	private FetchPerfumesByBrand fetchPerfumeUrl;
 	public static void main(String[] args) {
 		SpringApplication.run(PerfumeStatsCheckerApplication.class, args);
 	}
 	
 	public void run(String... args) throws Exception {
+		//List<String> urls = fetchPerfumeUrl.fetchUrlsByBrand("https://douglas.bg","Tom Ford");
+		//System.out.println(urls);
 		//System.out.println("Echo");
 		//jsonProcessingService.processJsonFromUrl("https://www.notino.bg/tom-ford/eau-de-soleil-blanc-toaletna-voda-uniseks/p-16097522/");
 		// Call the processAndSavePerfumeData method of the NotinoProcessingStrategy

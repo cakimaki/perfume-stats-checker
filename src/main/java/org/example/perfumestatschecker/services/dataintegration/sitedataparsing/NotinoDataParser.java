@@ -42,7 +42,6 @@ public class NotinoDataParser implements DataParsingStrategy {
 						"}" +
 						"return '';");//-------------------scrape this path (it has all needed info)
 		
-		webDriverService.closeWebDriver();
 		
 		ObjectMapper objectMapper = new ObjectMapper(); //inject object mapper
 		List<FilteredPerfumeDto> filteredPerfumeDtos = new ArrayList<>(); //create list of Filtered perfumes

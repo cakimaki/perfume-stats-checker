@@ -1,11 +1,13 @@
 package org.example.perfumestatschecker.services.entityservices.offerservice.priceservice;
 
+import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.models.offer.Offer;
 import org.example.perfumestatschecker.models.offer.OfferStatus;
 import org.example.perfumestatschecker.models.offer.Price;
 import org.example.perfumestatschecker.repositories.offer.OfferStatusRepository;
 import org.example.perfumestatschecker.repositories.offer.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,15 +18,18 @@ public class PriceServiceImpl implements PriceService{
 	
 	private final PriceRepository priceRepository;
 	private final OfferStatusRepository offerStatusRepository;
+	private final ConversionService conversionService;
 	@Autowired
-	public PriceServiceImpl(PriceRepository priceRepository, OfferStatusRepository offerStatusRepository){
+	public PriceServiceImpl(PriceRepository priceRepository, OfferStatusRepository offerStatusRepository, ConversionService conversionService){
 		this.priceRepository = priceRepository;
 		this.offerStatusRepository = offerStatusRepository;
+		this.conversionService = conversionService;
 	}
 	
 	@Transactional
 	@Override
-	public Price createOrUpdate(Double priceNumber, Offer offer){
+	public Price createOrUpdate(FilteredPerfumeDto dto, Offer offer){
+		Double priceNumber = convertToDouble(dto.getPrice());
 		Optional<Price> priceOpt = priceRepository.findByPrice(priceNumber);
 		
 		if(priceOpt.isPresent()){
@@ -33,6 +38,13 @@ public class PriceServiceImpl implements PriceService{
 			Price price = new Price();
 			price.setPrice(priceNumber);
 			price.setPricePerMl(calculatePricePer1Ml(priceNumber,offer.getPerfumeVariant().getVolume().getName()));
+			if(dto.getDiscountedPrice()!=null && !dto.getDiscountedPrice().equals("")){
+					double priceWoDiscount = convertToDouble(dto.getDiscountedPrice());
+					price.setDiscountPercent(calculatePercentDifferenceFromLastPrice(priceNumber,priceWoDiscount));
+					price.setDiscount(priceNumber-priceWoDiscount);
+					price.setPriceWithoutDiscount(convertToDouble(dto.getDiscountedPrice()));
+			}
+			
 			//find the existing offer and set lastPrice in the new
 			OfferStatus offerStatus = offerStatusRepository.findOfferStatusByOfferAndLastStatusTrue(offer);
 			if(offerStatus != null) {
@@ -43,6 +55,10 @@ public class PriceServiceImpl implements PriceService{
 		}
 	}
 	
+	private double convertToDouble(String priceStr) {
+		Double value = conversionService.convert(priceStr, Double.class);
+		return value != null ? value : 0.0;
+	}
 	public Double calculatePricePer1Ml(Double price, String ml){
 		return price / Double.parseDouble(ml);
 	}

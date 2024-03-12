@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PriceService {
 	
 	@Transactional
-	Price createOrUpdate(Double priceNumber, Offer offer);
+	Price createOrUpdate(FilteredPerfumeDto dto, Offer offer);
 	//Price createOrUpdatePrice(Offer offer, FilteredPerfumeDto dto);
 }

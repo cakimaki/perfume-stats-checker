@@ -3,6 +3,7 @@ package org.example.perfumestatschecker.services.dataintegration.webdriver.webfe
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.List;
 
 @Service
 public class WebDriverServiceImpl implements WebDriverService {
@@ -27,8 +29,27 @@ public class WebDriverServiceImpl implements WebDriverService {
 		//options.addArguments("--headless");
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
 		
+		if (this.driver != null) {
+			this.driver.quit(); // Quit the previous driver instance if it exists
+		}
+		
 		this.driver = new ChromeDriver(options);
 		return driver;
+	}
+	@Override
+	public WebElement findElement(By by) {
+		if (this.driver == null) {
+			initializeWebDriver(); // Make sure WebDriver is initialized
+		}
+		return driver.findElement(by); // Use WebDriver's findElement
+	}
+	@Override
+	public List<WebElement> findElements(By by){
+		return driver.findElements(by);
+	}
+	@Override
+	public void get(String site){
+		driver.get(site);
 	}
 	
 	//overloaded method
@@ -36,7 +57,10 @@ public class WebDriverServiceImpl implements WebDriverService {
 	public String fetchContent(String url) {
 		return fetchContent(url, "", ""); // Pass empty strings if no waiting or specific script execution is needed
 	}
-	
+	@Override
+	public String fetchContent(String url,String waitCond) {
+		return fetchContent(url, waitCond, ""); // Pass empty strings if no waiting or specific script execution is needed
+	}
 	@Override
 	public String fetchContent(String url, String waitConditionXPath, String scriptForExtraction) {
 		if (driver == null) {
@@ -68,9 +92,19 @@ public class WebDriverServiceImpl implements WebDriverService {
 	}
 	
 	@Override
+	public WebElement waitForElement(By by, int timeoutInSeconds) {
+		if (this.driver == null) {
+			initializeWebDriver();
+		}
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+		return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+	}
+	
+	@Override
 	public void closeWebDriver(){
 		if(driver != null){
 			driver.quit();
+			this.driver = null;
 		}
 	}
 }
