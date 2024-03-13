@@ -29,7 +29,7 @@ public class NotinoDataParser implements DataParsingStrategy {
 	@Override
 	public List<FilteredPerfumeDto> parseDataStringIntoObject(String url) {
 		webDriverService.initializeWebDriver();
-		webDriverService.optionsWait();
+		webDriverService.optionsWait(30);
 		
 		//fetching the needed content
 		String jsonResponse = webDriverService.fetchContent(

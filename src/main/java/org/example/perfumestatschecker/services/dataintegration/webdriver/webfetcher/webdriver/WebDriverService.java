@@ -19,7 +19,7 @@ public interface WebDriverService {
 	
 	String fetchContent(String url, String waitConditionXPath, String scriptForExtraction);
 	
-	WebDriverWait optionsWait();
+	WebDriverWait optionsWait(int duration);
 	
 	WebElement waitForElement(By by, int timeoutInSeconds);
 	

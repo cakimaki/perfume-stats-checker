@@ -57,7 +57,8 @@ public class PerfumeDataController {
 	@PostMapping("/douglas/urlsByBrand")
 	public ResponseEntity<String> processPerfumesByBrandName(@RequestBody UrlRequest urlRequest) {
 		try {
-			List<String> urls = fetchPerfumesByBrand.fetchUrlsByBrand("https://douglas.bg", urlRequest.getBrand());
+			List<String> urls = fetchPerfumesByBrand.fetchUrlsByBrand(urlRequest.getSite(), urlRequest.getBrand());
+			System.out.println("Number of urls fetched :" + urls.size() + " (this message is from controller).");
 			perfumeDataProcessingApproaches.processListOfPerfumeUrls(urls);
 			return ResponseEntity.ok("Data has been fetched...");
 		} catch (Exception e) {

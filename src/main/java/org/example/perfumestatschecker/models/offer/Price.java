@@ -2,6 +2,7 @@ package org.example.perfumestatschecker.models.offer;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +34,23 @@ public class Price {
 	@Column(name = "percent_difference_from_last_price")
 	private Integer percentDifferenceFromLastPrice;
 	
+	@Column(name = "timestamp")
+	private LocalDateTime priceStamp;
+	
 	@OneToMany(mappedBy = "price")
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
 	
 	public Price(){
 	
+	}
+	
+	public LocalDateTime getPriceStamp() {
+		return priceStamp;
+	}
+	
+	public void setPriceStamp(LocalDateTime priceStamp) {
+		this.priceStamp = priceStamp;
 	}
 	
 	public Price(Double price){

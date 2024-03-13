@@ -29,5 +29,7 @@ public interface OfferProjectionDto {
 	
 	LocalDateTime getLastTimeOfCheck();
 	
+	Double getPricePerMl();
+	
 	
 }

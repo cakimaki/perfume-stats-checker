@@ -3,6 +3,7 @@ package org.example.perfumestatschecker.repositories.offer;
 import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.models.offer.Offer;
 import org.example.perfumestatschecker.models.offer.Site;
+import org.example.perfumestatschecker.models.perfume.Brand;
 import org.example.perfumestatschecker.models.perfume.Perfume;
 import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,19 +19,21 @@ public interface OfferRepository extends JpaRepository<Offer,Long> {
 	
 	@Query("SELECT s.name as site, o.offerUrl as offerUrl, p.name as perfumeName, b.name as brandName, " +
 			"pt.name as perfumeType, v.name as volume, pr.price as price, pr.discountPercent as discountPercent," +
-			"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice," +
+			"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice, " +
+			"pr.pricePerMl as pricePerMl, " +
 			"ss.name as stockStatus, os.firstTimeOfCheck as firstTimeOfCheck, os.lastTimeOfCheck as lastTimeOfCheck " +
 			"FROM Offer o " +
 			"JOIN o.perfumeVariant pv " +
 			"JOIN pv.perfume p " +
 			"JOIN p.brand b " +
-			"JOIN pv.type pt " +
-			"JOIN pv.volume v " +
 			"JOIN o.site s " +
 			"JOIN o.offerStatuses os " +
 			"JOIN os.price pr " +
 			"JOIN os.stockStatus ss " +
-			"WHERE os.lastStatus = true")
+			"JOIN pv.type pt " +
+			"JOIN pv.volume v " +
+			"WHERE os.lastStatus = true " +
+			"ORDER BY pr.pricePerMl ASC")
 	List<OfferProjectionDto> findOfferDetailsWithLastStatus();
 	
 	@Query("SELECT s.name as site, o.offerUrl as offerUrl, p.name as perfumeName, b.name as brandName, " +
@@ -66,4 +69,38 @@ public interface OfferRepository extends JpaRepository<Offer,Long> {
 			"JOIN os.stockStatus ss " +
 			"WHERE os.lastStatus = true AND p.name = :name")
 	List<OfferProjectionDto> findOfferDetailsByPerfumeName(String name);
+/*
+	//best offer per 1ml
+	@Query("SELECT s.name as site " +
+			"FROM Offer o " +
+			"JOIN o.perfumeVariant pv " +
+			"JOIN pv.perfume p " +
+			"JOIN pv.type pt " +
+			"JOIN o.site s " +
+			"JOIN o.offerStatuses os " +
+			"JOIN os.price pr " +
+			"JOIN os.stockStatus ss " +
+			"" +
+			"")*/
+@Query("SELECT s.name as site, o.offerUrl as offerUrl, p.name as perfumeName, b.name as brandName, " +
+		"pt.name as perfumeType, v.name as volume, pr.price as price, pr.discountPercent as discountPercent," +
+		"pr.lastPrice as lastPrice, pr.percentDifferenceFromLastPrice as percentDifferenceFromLastPrice, " +
+		"pr.pricePerMl as pricePerMl, " +
+		"ss.name as stockStatus, os.firstTimeOfCheck as firstTimeOfCheck, os.lastTimeOfCheck as lastTimeOfCheck " +
+		"FROM Offer o " +
+		"JOIN o.perfumeVariant pv " +
+		"JOIN pv.perfume p " +
+		"JOIN p.brand b " +
+		"JOIN o.site s " +
+		"JOIN o.offerStatuses os " +
+		"JOIN os.price pr " +
+		"JOIN os.stockStatus ss " +
+		"JOIN pv.type pt " +
+		"JOIN pv.volume v " +
+		"WHERE os.lastStatus = true " +
+		"AND b.name =:brand1 " +
+		"ORDER BY pr.pricePerMl ASC")
+//brand1 to see how @Param works..
+		List<OfferProjectionDto> findOffersDetailsByBrand(@Param("brand1") String brand);
+
 }

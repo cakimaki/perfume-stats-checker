@@ -16,5 +16,7 @@ public interface OfferService {
 	
 	List<OfferProjectionDto> getOfferDetails();
 	
+	List<OfferProjectionDto> getOffersByBrand(String brand);
+	
 	List<OfferProjectionDto> getPerfumeOffersById(Long perfumeId);
 }

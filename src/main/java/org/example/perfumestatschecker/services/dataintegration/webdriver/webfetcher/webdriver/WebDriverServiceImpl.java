@@ -86,8 +86,8 @@ public class WebDriverServiceImpl implements WebDriverService {
 		}
 	}
 	@Override
-	public WebDriverWait optionsWait(){
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	public WebDriverWait optionsWait(int duration){
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(duration));
 		return wait;
 	}
 	
@@ -96,8 +96,13 @@ public class WebDriverServiceImpl implements WebDriverService {
 		if (this.driver == null) {
 			initializeWebDriver();
 		}
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
-		return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+		try{
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+			
+			return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+		}catch(Exception e){
+			throw new RuntimeException("it hasnt found the path??");
+		}
 	}
 	
 	@Override

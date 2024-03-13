@@ -4,7 +4,6 @@ import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.dtos.getdtos.OfferProjectionDto;
 import org.example.perfumestatschecker.models.offer.Offer;
 import org.example.perfumestatschecker.models.offer.Site;
-import org.example.perfumestatschecker.models.perfume.Perfume;
 import org.example.perfumestatschecker.models.perfume.PerfumeVariant;
 import org.example.perfumestatschecker.repositories.offer.OfferRepository;
 import org.springframework.stereotype.Service;
@@ -44,6 +43,11 @@ public class OfferServiceImpl implements OfferService {
 	@Override
 	public List<OfferProjectionDto> getOfferDetails(){
 		return offerRepository.findOfferDetailsWithLastStatus();
+	}
+	
+	@Override
+	public List<OfferProjectionDto> getOffersByBrand(String brand){
+		return offerRepository.findOffersDetailsByBrand(brand);
 	}
 	
 	@Override

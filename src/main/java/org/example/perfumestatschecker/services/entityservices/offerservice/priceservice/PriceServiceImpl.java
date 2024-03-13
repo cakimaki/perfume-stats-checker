@@ -11,6 +11,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -37,7 +38,10 @@ public class PriceServiceImpl implements PriceService{
 		}else{
 			Price price = new Price();
 			price.setPrice(priceNumber);
-			price.setPricePerMl(calculatePricePer1Ml(priceNumber,offer.getPerfumeVariant().getVolume().getName()));
+			price.setPriceStamp(LocalDateTime.now());
+			if(!offer.getPerfumeVariant().getVolume().getName().isEmpty()) {
+				price.setPricePerMl(calculatePricePer1Ml(priceNumber, offer.getPerfumeVariant().getVolume().getName()));
+			}
 			if(dto.getDiscountedPrice()!=null && !dto.getDiscountedPrice().equals("")){
 					double priceWoDiscount = convertToDouble(dto.getDiscountedPrice());
 					price.setDiscountPercent(calculatePercentDifferenceFromLastPrice(priceNumber,priceWoDiscount));
