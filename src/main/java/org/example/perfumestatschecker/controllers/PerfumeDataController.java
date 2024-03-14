@@ -58,7 +58,7 @@ public class PerfumeDataController {
 	public ResponseEntity<String> processPerfumesByBrandName(@RequestBody UrlRequest urlRequest) {
 		try {
 			List<String> urls = fetchPerfumesByBrand.fetchUrlsByBrand(urlRequest.getSite(), urlRequest.getBrand());
-			System.out.println("Number of urls fetched :" + urls.size() + " (this message is from controller).");
+			System.out.println("Number of urls to be fetched :" + urls.size() + " (this message is from controller).");
 			perfumeDataProcessingApproaches.processListOfPerfumeUrls(urls);
 			return ResponseEntity.ok("Data has been fetched...");
 		} catch (Exception e) {

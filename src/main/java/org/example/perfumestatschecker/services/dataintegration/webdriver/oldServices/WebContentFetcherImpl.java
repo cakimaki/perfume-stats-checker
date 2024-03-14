@@ -1,6 +1,5 @@
-package org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn;
+package org.example.perfumestatschecker.services.dataintegration.webdriver.oldServices;
 
-import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

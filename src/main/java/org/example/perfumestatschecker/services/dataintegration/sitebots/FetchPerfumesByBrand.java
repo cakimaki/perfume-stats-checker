@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class FetchPerfumesByBrand {
@@ -31,6 +32,11 @@ public class FetchPerfumesByBrand {
 			WebElement cookiesAcceptButton = driver.waitForElement(By.cssSelector("#btn-cookie-allow"), 30);
 			cookiesAcceptButton.click();
 			
+			try {
+				TimeUnit.SECONDS.sleep(3);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 			// Assuming you need to wait for the search button to be clickable
 			WebElement searchButton = driver.waitForElement(By.cssSelector("#html-body > div.page-wrapper > header > div.header.content > section > div > section.amsearch-input-wrapper.-dynamic-width.-match.-typed > button.amsearch-button.-loupe.-clear.-icon"), 30);
 			searchButton.click();

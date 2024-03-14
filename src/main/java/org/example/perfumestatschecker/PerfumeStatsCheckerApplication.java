@@ -1,22 +1,12 @@
 package org.example.perfumestatschecker;
 
 import org.example.perfumestatschecker.services.dataintegration.sitebots.FetchPerfumesByBrand;
-import org.example.perfumestatschecker.services.dataintegration.storingdata.PerfumeDataSavingService;
-import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParsingStrategy;
 
 
-import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @SpringBootApplication
@@ -37,8 +27,8 @@ public class PerfumeStatsCheckerApplication implements CommandLineRunner {
 	}
 	
 	public void run(String... args) throws Exception {
-		List<String> urls = fetchPerfumeUrl.fetchUrlsByBrand("notino","Tom Ford");
-		System.out.println(urls);
+		//List<String> urls = fetchPerfumeUrl.fetchUrlsByBrand("notino","Tom Ford");
+		//System.out.println(urls);
 		//System.out.println("Echo");
 		//jsonProcessingService.processJsonFromUrl("https://www.notino.bg/tom-ford/eau-de-soleil-blanc-toaletna-voda-uniseks/p-16097522/");
 		// Call the processAndSavePerfumeData method of the NotinoProcessingStrategy

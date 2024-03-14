@@ -4,7 +4,7 @@ import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParserSelector;
 import org.example.perfumestatschecker.services.dataintegration.sitedataparsing.DataParsingStrategy;
 
-import org.example.perfumestatschecker.services.dataintegration.webdriver.workingFetcherRn.WebContentFetcher;
+import org.example.perfumestatschecker.services.dataintegration.webdriver.oldServices.WebContentFetcher;
 import org.example.perfumestatschecker.services.dataintegration.storingdata.PerfumeDataSavingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

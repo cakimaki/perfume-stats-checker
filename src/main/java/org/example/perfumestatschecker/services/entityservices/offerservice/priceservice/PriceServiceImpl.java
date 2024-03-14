@@ -6,6 +6,7 @@ import org.example.perfumestatschecker.models.offer.OfferStatus;
 import org.example.perfumestatschecker.models.offer.Price;
 import org.example.perfumestatschecker.repositories.offer.OfferStatusRepository;
 import org.example.perfumestatschecker.repositories.offer.PriceRepository;
+import org.openqa.selenium.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class PriceServiceImpl implements PriceService{
 	@Override
 	public Price createOrUpdate(FilteredPerfumeDto dto, Offer offer){
 		Double priceNumber = convertToDouble(dto.getPrice());
+		if(priceNumber == 0){
+			throw new NoSuchElementException("Fetched price is 0?");
+		}
+		
 		Optional<Price> priceOpt = priceRepository.findByPrice(priceNumber);
 		
 		if(priceOpt.isPresent()){
@@ -51,6 +56,7 @@ public class PriceServiceImpl implements PriceService{
 			
 			//find the existing offer and set lastPrice in the new
 			OfferStatus offerStatus = offerStatusRepository.findOfferStatusByOfferAndLastStatusTrue(offer);
+			System.out.println(offer);
 			if(offerStatus != null) {
 				price.setLastPrice(offerStatus.getPrice().getPrice());
 				price.setPercentDifferenceFromLastPrice(calculatePercentDifferenceFromLastPrice(price.getPrice(),price.getLastPrice()));

@@ -54,7 +54,18 @@ public class DouglasDataParser implements DataParsingStrategy {
 		if (offerElements.isEmpty()) {//if there arent options and its only 1
 			FilteredPerfumeDto dto = new FilteredPerfumeDto();
 			String volume = volumeClearance(doc.select("#weight-container").first().text()); // first because it returns Elements and text because it needs to be parsed to string
-			String price = doc.select("#product-price-194717").attr("data-price-amount");
+			
+			//price
+			String price = "";
+			Elements priceElements = doc.select("[id^=product-price-]");
+			
+			for (Element priceElement : priceElements) {
+				price = priceElement.attr("data-price-amount");
+				if (!price.isEmpty()) {
+					break; // Break the loop once a non-empty price is found
+				}
+			}
+			
 			String discountedPrice = doc.select("#old-price-194717").attr("data-price-amount");
 			String availability = availabilityClearance(doc.select("div.stock.stock-availability.available span").first().text());
 			String type = doc.select("#product-attribute-specs-table > span.value.tipove").text();
@@ -97,10 +108,14 @@ public class DouglasDataParser implements DataParsingStrategy {
 				if(price.isEmpty()){
 					price = priceClearance(offerElement.select(".additional-option-pdc-price").text());//its not always the upper case
 				}
+				if(price.isEmpty()){
+					price = priceClearance(offerElement.select(".additional-option-final-price").text());//if price is still 0..
+				}
+			
 				String discountedPrice = priceClearance(offerElement.select(".additional-option-old-price").text());
 				String availability = availabilityClearance(doc.select("div.stock.stock-availability.available span").first().text());
 				String type = typeClearance(doc.select("#product-attribute-specs-table > span.value.tipove").text());
-				
+				//
 				dto.setName(productName);
 				dto.setBrand(brandName);
 				dto.setSite("Douglas"); // Assuming "Douglas" is the static site name
