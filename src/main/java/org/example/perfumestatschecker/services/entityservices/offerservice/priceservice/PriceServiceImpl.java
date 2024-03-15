@@ -43,6 +43,8 @@ public class PriceServiceImpl implements PriceService{
 		}else{
 			Price price = new Price();
 			price.setPrice(priceNumber);
+			
+			price.setCreatedAt(LocalDateTime.now());
 			price.setPriceStamp(LocalDateTime.now());
 			if(!offer.getPerfumeVariant().getVolume().getName().isEmpty()) {
 				price.setPricePerMl(calculatePricePer1Ml(priceNumber, offer.getPerfumeVariant().getVolume().getName()));

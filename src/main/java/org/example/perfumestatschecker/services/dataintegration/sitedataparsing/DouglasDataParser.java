@@ -69,16 +69,7 @@ public class DouglasDataParser implements DataParsingStrategy {
 			String discountedPrice = doc.select("#old-price-194717").attr("data-price-amount");
 			String availability = availabilityClearance(doc.select("div.stock.stock-availability.available span").first().text());
 			String type = doc.select("#product-attribute-specs-table > span.value.tipove").text();
-			
-			System.out.println(type);
 			type = typeClearance(type);
-			System.out.println(volume);
-			System.out.println(price);
-			System.out.println(discountedPrice);
-			System.out.println(availability);
-			System.out.println(productName);
-			System.out.println(brandName);
-			System.out.println(type);
 			
 			dto.setName(productName);
 			dto.setBrand(brandName);

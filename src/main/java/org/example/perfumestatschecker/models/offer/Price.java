@@ -37,12 +37,23 @@ public class Price {
 	@Column(name = "timestamp")
 	private LocalDateTime priceStamp;
 	
+	@Column(name = "created_at")
+	private LocalDateTime createdAt;
+	
 	@OneToMany(mappedBy = "price")
 	private List<OfferStatus> offerStatuses = new ArrayList<>();
 	
 	
 	public Price(){
 	
+	}
+	
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 	
 	public LocalDateTime getPriceStamp() {
