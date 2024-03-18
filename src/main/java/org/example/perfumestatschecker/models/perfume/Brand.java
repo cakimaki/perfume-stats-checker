@@ -4,7 +4,7 @@ package org.example.perfumestatschecker.models.perfume;
 import jakarta.persistence.*;
 
 import java.util.List;
-
+import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "brand")
 public class Brand {
@@ -12,6 +12,7 @@ public class Brand {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Column(name = "brand_name")
 	private String name;
 	

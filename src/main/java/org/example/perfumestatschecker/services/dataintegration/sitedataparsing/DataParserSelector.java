@@ -24,6 +24,8 @@ public class DataParserSelector {
 			return strategies.get("NotinoProcessingStrategy");
 		} else if (url.contains("douglas")) {
 			return strategies.get("DouglasProcessingStrategy");
+		}else if(url.contains("parfum.bg")){
+			return strategies.get("ParfiumBgProcessingStrategy");
 		}
 		throw new IllegalArgumentException("No strategy found for URL: " + url);
 	}

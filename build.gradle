@@ -33,6 +33,9 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
 
+	//  jakarta validation
+	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
 	//jsoup
 	implementation 'org.jsoup:jsoup:1.17.2'
 

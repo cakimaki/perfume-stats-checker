@@ -14,6 +14,7 @@ public class PerfumeVariant {
 	private Long id;
 	
 	//name of perfume
+	
 	@ManyToOne
 	@JoinColumn(name = "perfumename_id")
 	private Perfume perfume;
