@@ -26,7 +26,7 @@ public class WebDriverServiceImpl implements WebDriverService {
 		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 		
 		ChromeOptions options = new ChromeOptions();
-		//options.addArguments("--headless");
+		options.addArguments("--headless");
 		options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36");
 		//options.addArguments("set_window_position(-2000,0)");
 		if (this.driver != null) {

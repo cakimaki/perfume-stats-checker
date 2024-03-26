@@ -6,5 +6,5 @@ import org.example.perfumestatschecker.dtos.FilteredPerfumeDto;
 import java.util.List;
 
 public interface PerfumeDataSavingService {
-	public void persistFilteredPerfumeData(List<FilteredPerfumeDto> dtos);
+	void persistFilteredPerfumeData(List<FilteredPerfumeDto> dtos);
 }

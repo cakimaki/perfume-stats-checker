@@ -4,7 +4,7 @@ import org.example.perfumestatschecker.dtos.UrlRequest;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProcessingApproaches;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProcessingPipelineService;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeUpdateService;
-import org.example.perfumestatschecker.services.dataintegration.sitebots.FetchPerfumesByBrand;
+import org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand.FetchPerfumesByBrand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

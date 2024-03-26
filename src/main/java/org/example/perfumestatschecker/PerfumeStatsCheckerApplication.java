@@ -1,6 +1,6 @@
 package org.example.perfumestatschecker;
 
-import org.example.perfumestatschecker.services.dataintegration.sitebots.FetchPerfumesByBrand;
+import org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand.FetchPerfumesByBrand;
 
 
 import org.springframework.boot.SpringApplication;
