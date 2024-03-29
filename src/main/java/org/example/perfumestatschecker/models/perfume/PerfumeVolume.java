@@ -21,6 +21,9 @@ public class PerfumeVolume {
 	private List<PerfumeVariant> perfumeVariant;
 	
 	public PerfumeVolume(){}
+	public PerfumeVolume(String name) {
+		this.name = name;
+	}
 	public PerfumeVolume(String name, List<PerfumeVariant> perfumeVariant) {
 		this.name = name;
 		this.perfumeVariant = perfumeVariant;
