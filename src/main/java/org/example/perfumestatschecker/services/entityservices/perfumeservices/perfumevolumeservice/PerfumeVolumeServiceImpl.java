@@ -20,6 +20,9 @@ public class PerfumeVolumeServiceImpl implements PerfumeVolumeService{
 	
 	@Override
 	public PerfumeVolume findOrCreateVolume(String volumename){
+		if(volumename == null ||volumename.isEmpty() || volumename.equals(" ")){
+			throw new IllegalArgumentException("volume name is empty or ' '");
+		}
 		Optional<PerfumeVolume> optionalPerfumeVolume = perfumeVolumeRepository.findByName(volumename);
 		if(optionalPerfumeVolume.isPresent()){
 			return optionalPerfumeVolume.get();

@@ -50,9 +50,9 @@ class PerfumeVolumeServiceImplTest {
 		//Arrange
 		String volumeName = "30";
 		Optional<PerfumeVolume> optionalPerfumeVolume = Optional.of(new PerfumeVolume("30"));
-		PerfumeVolume perfumeVolume = new PerfumeVolume("30");
+		PerfumeVolume newVolume = new PerfumeVolume("30");
 		when(perfumeVolumeRepository.findByName(volumeName)).thenReturn(Optional.empty());
-		when(perfumeVolumeRepository.save(Mockito.any(PerfumeVolume.class))).thenReturn(perfumeVolume);
+		when(perfumeVolumeRepository.save(Mockito.any(PerfumeVolume.class))).thenReturn(newVolume);
 		
 		//Act
 		PerfumeVolume savedVolume = perfumeVolumeService.findOrCreateVolume(volumeName);
@@ -61,6 +61,24 @@ class PerfumeVolumeServiceImplTest {
 		Assertions.assertThat(savedVolume).isNotNull();
 		//Assertions.assertThat(savedVolume).isEqualTo(optionalPerfumeVolume);
 		Assertions.assertThat(savedVolume.getName()).isEqualTo("30");
+	}
+	
+	@Test
+	public void JustASpaceIsPassed_ThrowException(){
+		String volumeNameNull = " ";
+		assertThrows(IllegalArgumentException.class , () -> perfumeVolumeService.findOrCreateVolume(volumeNameNull));
+	}
+	
+	@Test
+	public void EmptyStringIsPassed_ThrowException(){
+		String volumeNameNull = "";
+		assertThrows(IllegalArgumentException.class , () -> perfumeVolumeService.findOrCreateVolume(volumeNameNull));
+	}
+	
+	@Test
+	public void NullIsPassed_ThrowException(){
+		String volumeNameNull = null;
+		assertThrows(IllegalArgumentException.class, () -> perfumeVolumeService.findOrCreateVolume(volumeNameNull));
 	}
 	
 	
