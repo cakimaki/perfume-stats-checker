@@ -17,6 +17,13 @@ public class PerfumeType {
 	@OneToMany(mappedBy = "type")
 	private List<PerfumeVariant> perfumesVariants;
 	
+	public PerfumeType() {
+	}
+	
+	public PerfumeType(String name) {
+		this.name = name;
+	}
+	
 	public String getName() {
 		return name;
 	}
