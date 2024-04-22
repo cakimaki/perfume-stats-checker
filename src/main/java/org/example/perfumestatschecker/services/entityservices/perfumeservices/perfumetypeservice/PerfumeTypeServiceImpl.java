@@ -21,7 +21,8 @@ public class PerfumeTypeServiceImpl implements PerfumeTypeService{
 	@Override
 	public PerfumeType findOrCreatePerfumeType(String perfumetypename){
 		if(perfumetypename == null || perfumetypename.isEmpty() || perfumetypename.equals(" ")){
-			throw new IllegalArgumentException("Cannot save perfume type name in the DB because it is null.");
+			throw new IllegalArgumentException("Cannot save perfume type name in the DB because it is null." +"'"+ perfumetypename + "'");
+			
 		}
 		
 		Optional<PerfumeType> perfumeTypeOptional = perfumeTypeRepository.findByName(perfumetypename);

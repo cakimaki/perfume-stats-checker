@@ -1,4 +1,4 @@
-package org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand;
+package org.example.perfumestatschecker.services.dataintegration.sitebots.another;
 
 import org.example.perfumestatschecker.services.dataintegration.webdriver.webfetcher.webdriver.WebDriverService;
 import org.openqa.selenium.By;

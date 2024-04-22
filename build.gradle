@@ -27,7 +27,7 @@ dependencies {
 	//mysql
 	implementation 'mysql:mysql-connector-java:8.0.33'
 
-	implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
+	implementation 'org.seleniumhq.selenium:selenium-java:4.19.1'
 
 	//junit 5
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'

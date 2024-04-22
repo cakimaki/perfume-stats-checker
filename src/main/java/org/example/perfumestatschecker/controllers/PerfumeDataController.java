@@ -4,7 +4,9 @@ import org.example.perfumestatschecker.dtos.UrlRequest;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProcessingApproaches;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeDataProcessingPipelineService;
 import org.example.perfumestatschecker.services.dataintegration.PerfumeUpdateService;
-import org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand.FetchPerfumesByBrand;
+import org.example.perfumestatschecker.services.dataintegration.sitebots.another.FetchPerfumesByBrand;
+import org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand.FetchUrlsSelector;
+import org.example.perfumestatschecker.services.dataintegration.sitebots.fetchUrlsByBrand.FetchUrlsStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +17,18 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/perfume")
 public class PerfumeDataController {
-	private final FetchPerfumesByBrand fetchPerfumesByBrand;
+	//private final FetchPerfumesByBrand fetchPerfumesByBrand;
 	private final PerfumeDataProcessingPipelineService perfumeDataProcessingPipelineService;
 	private final PerfumeDataProcessingApproaches perfumeDataProcessingApproaches;
 	private final PerfumeUpdateService perfumeUpdateService;
+	private final FetchUrlsSelector fetchUrlsSelector;
 	@Autowired
-	public PerfumeDataController(FetchPerfumesByBrand fetchPerfumesByBrand, PerfumeDataProcessingPipelineService perfumeDataProcessingPipelineService, PerfumeDataProcessingApproaches perfumeDataProcessingApproaches, PerfumeUpdateService perfumeUpdateService){
-		this.fetchPerfumesByBrand = fetchPerfumesByBrand;
+	public PerfumeDataController(FetchPerfumesByBrand fetchPerfumesByBrand, PerfumeDataProcessingPipelineService perfumeDataProcessingPipelineService, PerfumeDataProcessingApproaches perfumeDataProcessingApproaches, PerfumeUpdateService perfumeUpdateService, FetchUrlsSelector fetchUrlsSelector){
+		//this.fetchPerfumesByBrand = fetchPerfumesByBrand;
 		this.perfumeDataProcessingPipelineService = perfumeDataProcessingPipelineService;
 		this.perfumeDataProcessingApproaches = perfumeDataProcessingApproaches;
 		this.perfumeUpdateService = perfumeUpdateService;
+		this.fetchUrlsSelector = fetchUrlsSelector;
 	}
 
 	@PostMapping()
@@ -57,7 +61,8 @@ public class PerfumeDataController {
 	@PostMapping("/douglas/urlsByBrand")
 	public ResponseEntity<String> processPerfumesByBrandName(@RequestBody UrlRequest urlRequest) {
 		try {
-			List<String> urls = fetchPerfumesByBrand.fetchUrlsByBrand(urlRequest.getSite(), urlRequest.getBrand());
+			FetchUrlsStrategy strategySelected = fetchUrlsSelector.selectStrategy(urlRequest.getSite());
+			List<String> urls = strategySelected.fetchPerfumeUrlsByBrand(urlRequest.getBrand());
 			System.out.println("Number of urls to be fetched :" + urls.size() + " (this message is from controller).");
 			perfumeDataProcessingApproaches.processListOfPerfumeUrls(urls);
 			return ResponseEntity.ok("Data has been fetched...");
